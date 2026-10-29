@@ -122,5 +122,5 @@ python3 -m tools.learning_hub build                    # 页面按恢复后的�
 
 - 官方站点:`https://huanyusun.github.io/ai-agent-learning/`,由 `learning-hub-pages` 工作流在 `learning/`、大纲或工作流改动推送到 main 时自动发布(也可手动 dispatch)。
 - 页面是纯静态快照:`index.html`、数据、生成 Markdown、大纲与维护手册都在站点内;`platform/` 等代码研读链接指向仓库文件,请回 GitHub 仓库查看。
-- **自有域名代理加速**:DNS 把域名解析到你的服务器 → 服务器按 `docs/nginx-learning-proxy.conf.example` 反向代理 Pages → 以后直接用你的域名访问。站点内容更新仍走 Pages 工作流,代理无需改动。
+- **自有域名代理加速**:使用 `learning.f2b.me`(DNS 已指向服务器 154.29.144.91,无需改动)。服务器按 `docs/nginx-learning.f2b.me.conf` 反向代理 Pages:先放配置并注释 ssl 三行,reload 后 `certbot certonly --nginx -d learning.f2b.me` 签证书,再恢复 ssl 三行并 reload。站点内容更新仍走 Pages 工作流,代理无需改动。配置完成后用 `curl -sSI https://learning.f2b.me/` 验证。
 - 改用域名后,页面进度 localStorage 会绑定新来源(域名),与 `github.io` 和 `file://` 互不相通;切换入口先「导出进度 JSON」再「导入」。
