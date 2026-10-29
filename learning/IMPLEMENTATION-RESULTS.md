@@ -237,3 +237,10 @@
    - 第 2 次暴露仓库设置:新仓库默认禁止 Actions 创建 PR,失败路径按设计工作(Job Summary、30 天 artifact、失败原因日志均保留)。已在仓库设置中允许 Actions 创建 PR。
    - 第 3 次全绿:20 门检查(12 可达、8 受限——GitHub 出口 IP 被部分站点 403,如实标注)、HF + LangChain 双来源候选发现、正文变化提醒(C05/C20)、提交至 automation/learning-hub-refresh 并创建 PR #1。
 3. 结论:定时链路端到端可用;PR 合并由人工完成。
+
+## 自定义域名上线(2026-10-29,learning.f2b.me)
+
+- GitHub Pages:`https://huanyusun.github.io/ai-agent-learning/`(workflow 部署,推送自动更新,已验证 200)。
+- 代理加速:`https://learning.f2b.me/` — 用户服务器(154.29.144.91)nginx 反代 Pages;证书 Let's Encrypt(webroot 自动续期);外部验证:证书 CN 正确、HTTP 301→HTTPS 200、标题与站内资源正常、无 github.io 跳转泄漏。
+- 服务器拓扑为 stream 层 SNI 分发:learning 监听 127.0.0.1:10444 并在 nginx.conf map 登记(首版直接监听公网 443 与 stream 冲突导致 reload 静默失败,已修正);实际配置存档于 `docs/nginx-learning.f2b.me.conf`。
+- 操作方式:部署脚本上传至服务器 `~/learning-deploy.sh`、`~/learning-repair2.sh`,由用户以 sudo 执行(sudo 密码不经过任何对话或日志)。
