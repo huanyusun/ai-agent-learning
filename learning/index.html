@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<!-- 由 tools/learning_hub 生成;请勿手工编辑,改动会被 build 覆盖。
+     数据来源:learning/data/catalog.json;重建:python3 -m tools.learning_hub build;
+     漂移检查:python3 -m tools.learning_hub build --check。
+     页面结构与样式源文件:learning/web/template.html。 -->
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Agent 工程课程中心</title>
+<style>
+:root {
+  --bg: #f6f7f9;
+  --card: #ffffff;
+  --ink: #1c2733;
+  --muted: #5b6b7c;
+  --line: #dfe4ea;
+  --accent: #0b62d6;
+  --accent-soft: #e8f1fd;
+  --core: #0b62d6;
+  --elective: #7a4dd6;
+  --warn: #b0641a;
+  --warn-soft: #fdf3e4;
+  --bad: #b3362c;
+  --bad-soft: #fbeae8;
+  --ok: #1c7a43;
+  --ok-soft: #e6f4ec;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 15px/1.65 -apple-system, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+}
+header.top {
+  background: var(--card);
+  border-bottom: 1px solid var(--line);
+  padding: 20px 16px 12px;
+}
+.wrap { max-width: 1180px; margin: 0 auto; padding: 0 16px; }
+h1 { font-size: 22px; margin: 0 0 4px; }
+.sub { color: var(--muted); font-size: 13px; margin: 0 0 10px; }
+nav.toc { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 14px; }
+nav.toc a { color: var(--accent); text-decoration: none; padding: 2px 0; }
+nav.toc a:hover { text-decoration: underline; }
+main.wrap { padding: 18px 16px 40px; }
+.strip { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 18px; }
+.stat {
+  background: var(--card); border: 1px solid var(--line); border-radius: 10px;
+  padding: 10px 14px; min-width: 120px; flex: 1;
+}
+.stat b { font-size: 20px; display: block; }
+.stat span { color: var(--muted); font-size: 12px; }
+section { margin-bottom: 34px; }
+h2 { font-size: 18px; margin: 0 0 4px; scroll-margin-top: 12px; }
+h2 .anchor-link { font-size: 13px; color: var(--muted); font-weight: normal; margin-left: 8px; }
+.secdesc { color: var(--muted); font-size: 13px; margin: 0 0 12px; }
+.card {
+  background: var(--card); border: 1px solid var(--line); border-radius: 10px;
+  padding: 14px 16px; margin-bottom: 14px;
+}
+.card h3 { margin: 0 0 6px; font-size: 16px; }
+.card .obj { color: var(--muted); font-size: 13px; margin: 0 0 8px; }
+.card ul { margin: 6px 0; padding-left: 18px; }
+.meta-list { font-size: 13px; color: var(--muted); margin: 0; padding-left: 18px; }
+.wraptable { overflow-x: auto; background: var(--card); border: 1px solid var(--line); border-radius: 10px; }
+table { border-collapse: collapse; width: 100%; font-size: 13.5px; }
+th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { background: #eef1f5; font-weight: 600; white-space: nowrap; position: sticky; top: 0; }
+tbody tr:last-child td { border-bottom: none; }
+a { color: var(--accent); }
+.badge {
+  display: inline-block; border-radius: 999px; padding: 1px 9px; font-size: 12px;
+  white-space: nowrap; margin: 1px 2px 1px 0; border: 1px solid transparent;
+}
+.core { background: var(--accent-soft); color: var(--core); }
+.elective { background: #f1ebfb; color: var(--elective); }
+.free { background: var(--ok-soft); color: var(--ok); }
+.mixed { background: var(--warn-soft); color: var(--warn); }
+.unknown-cost { background: var(--bad-soft); color: var(--bad); }
+.reviewA { background: var(--ok-soft); color: var(--ok); }
+.reviewB { background: var(--warn-soft); color: var(--warn); }
+.status-ok { background: var(--ok-soft); color: var(--ok); }
+.status-warn { background: var(--warn-soft); color: var(--warn); }
+.status-bad { background: var(--bad-soft); color: var(--bad); }
+.status-idle { background: #eef1f5; color: var(--muted); }
+ul.plain { margin: 4px 0; padding-left: 18px; }
+ul.plain li { margin: 2px 0; }
+.note { font-size: 12.5px; color: var(--muted); }
+#storage-note {
+  background: var(--warn-soft); color: var(--warn); border-radius: 8px;
+  padding: 8px 12px; margin: 0 0 14px; font-size: 13px;
+}
+.toolbar {
+  display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 14px;
+}
+.toolbar input[type="search"] {
+  flex: 1 1 220px; min-width: 150px; padding: 7px 10px;
+  border: 1px solid var(--line); border-radius: 8px; font: inherit; background: var(--card); color: var(--ink);
+}
+.toolbar select {
+  padding: 7px 8px; border: 1px solid var(--line); border-radius: 8px;
+  font: inherit; background: var(--card); color: var(--ink); max-width: 100%;
+}
+button, .filelabel { font: inherit; cursor: pointer; }
+button { color: var(--ink); }
+.pbtn {
+  border: 1px solid var(--line); border-radius: 999px; padding: 2px 10px;
+  background: var(--card); font-size: 12.5px; white-space: nowrap;
+}
+.st-idle { color: var(--muted); }
+.st-doing { background: var(--accent-soft); color: var(--core); border-color: transparent; }
+.st-done { background: var(--ok-soft); color: var(--ok); border-color: transparent; }
+.st-review { background: var(--warn-soft); color: var(--warn); border-color: transparent; }
+.btnrow { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0; align-items: center; }
+.btnrow button, .btnrow .filelabel {
+  border: 1px solid var(--line); background: var(--card); border-radius: 8px; padding: 6px 12px;
+}
+.filelabel { display: inline-block; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.empty-note {
+  padding: 14px; color: var(--muted); font-size: 14px;
+  background: var(--card); border: 1px dashed var(--line); border-radius: 10px;
+}
+code { background: #eef1f5; border-radius: 4px; padding: 1px 5px; }
+footer {
+  border-top: 1px solid var(--line); color: var(--muted);
+  font-size: 12.5px; padding: 16px; text-align: center; background: var(--card);
+}
+@media (max-width: 640px) {
+  body { font-size: 14px; }
+  .stat { min-width: 45%; }
+  th, td { padding: 7px 8px; }
+  h1 { font-size: 19px; }
+  .toolbar select { flex: 1 1 40%; }
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <h1>AI Agent 工程课程中心</h1>
+    <p class="sub" id="meta-line"></p>
+    <nav class="toc" id="toc"></nav>
+  </div>
+</header>
+<main class="wrap">
+  <div id="storage-note" class="note" hidden></div>
+  <div class="strip" id="stats"></div>
+  <div class="note" id="check-note" style="margin:-8px 0 20px;"></div>
+  <section id="progress"><h2>我的进度<span class="anchor-link">#progress</span></h2>
+    <p class="secdesc">进度只保存在本机浏览器,不参与生成与自动更新;导出/导入用于备份与跨浏览器迁移。「标为完成」是学习标记,不等于项目验收。</p>
+    <div class="card">
+      <p id="progress-summary" style="margin:0 0 8px;"></p>
+      <div class="btnrow">
+        <button id="btn-export" type="button">导出进度 JSON</button>
+        <label class="filelabel" for="file-import">导入进度 JSON<input type="file" id="file-import" accept=".json,application/json" hidden></label>
+        <button id="btn-clear" type="button">清空本机进度</button>
+      </div>
+      <p id="import-result" class="note" style="margin:4px 0 0;"></p>
+      <p class="note" style="margin:6px 0 0;">存储键:<code>learning-hub.progress.v1</code>(localStorage)。课程进度按作业 ID(如 S03-C08-01)、周进度按 W ID 记录,避免把某一章完成误当成整门课程完成。</p>
+    </div>
+  </section>
+  <section id="stages"><h2>学习阶段与指定内容<span class="anchor-link">#stages</span></h2>
+    <p class="secdesc">按能力依赖排列;每门资源只录入一次,在多个阶段复用时各阶段分别指定章节与交付物。可用下方搜索与筛选组合过滤。</p>
+    <div class="toolbar card" role="search">
+      <input id="f-search" type="search" placeholder="搜索课程、章节、说明…" aria-label="搜索课程与章节">
+      <select id="f-stage" aria-label="按阶段筛选"></select>
+      <select id="f-language" aria-label="按语言筛选"></select>
+      <select id="f-kind" aria-label="按类型筛选"></select>
+      <select id="f-priority" aria-label="按主修选修筛选"></select>
+      <button id="f-clear" type="button">清除筛选</button>
+      <span id="f-count" class="note"></span>
+    </div>
+    <div id="empty-stages" class="empty-note" hidden>没有符合当前筛选的阶段。</div>
+    <div id="stage-list"></div>
+  </section>
+  <section id="courses"><h2>全部资源(C01–C20)<span class="anchor-link">#courses</span></h2>
+    <p class="secdesc">核查标记 A=已读取官方页面;B=官方目录确认存在但详情页 403。免费阅读不等于模型 API、云服务、GPU 或证书免费。核查日期固定为 2026-10-28。</p>
+    <div class="wraptable"><table id="course-table"></table></div>
+    <div id="empty-courses" class="empty-note" hidden style="margin-top:10px;">没有符合当前筛选的资源;调整搜索词或清除筛选后重试。</div>
+    <p class="note" id="dl-note"></p>
+  </section>
+  <section id="weeks"><h2>18 周实践与交付<span class="anchor-link">#weeks</span></h2>
+    <p class="secdesc">完成一周需要交付可检查成果;点击每行「进度」按钮记录本机学习状态。</p>
+    <div class="wraptable"><table id="week-table"></table></div>
+  </section>
+  <section id="repos"><h2>仓库研读入口<span class="anchor-link">#repos</span></h2>
+    <p class="secdesc">与现有 FDE 产品代码连接的阅读入口;先在独立练习中实现,再判断是否适合产品。</p>
+    <div class="wraptable"><table id="repo-table"></table></div>
+  </section>
+  <section id="candidates"><h2>候选课程(未纳入学习路径)<span class="anchor-link">#candidates</span></h2>
+    <p class="secdesc">来自自动发现的官方目录候选,不直接加入主修;是否纳入由人工决定。</p>
+    <div id="candidate-list"></div>
+  </section>
+</main>
+<footer>
+  由 <code>python3 -m tools.learning_hub build</code> 从 <code>learning/data/catalog.json</code> 生成 ·
+  人工核查日期 2026-10-28 · 漂移检查:<code>build --check</code> ·
+  完整大纲见 <a href="../AI学习路径与大纲.md">AI学习路径与大纲.md</a>
+</footer>
+<script>
+window.LEARNING_HUB_DATA = {"candidates": {"candidates": [{"first_seen_at": "2026-10-28T17:00:30Z", "last_seen_at": "2026-10-28T17:00:30Z", "note": "", "source_id": "langchain-academy", "status": "new", "title": "Introduction to Deep Agents Course Learn how to build long-running agents for complex workflows with Deep Agents, LangChain’s open-source agent harness. You’ll explore what an agent harness is, how it accelerates development, and how to use LangSmith to improve your agents.", "url": "https://academy.langchain.com/courses/foundation-introduction-to-deepagents"}, {"first_seen_at": "2026-10-28T17:00:30Z", "last_seen_at": "2026-10-28T17:00:30Z", "note": "", "source_id": "langchain-academy", "status": "new", "title": "Quickstart: LangSmith Essentials Course Learn the essentials of LangSmith — the comprehensive platform for agent engineering that helps teams use live production data for continuous testing and improvement.", "url": "https://academy.langchain.com/courses/quickstart-langsmith-essentials"}, {"first_seen_at": "2026-10-28T17:00:30Z", "last_seen_at": "2026-10-28T17:00:30Z", "note": "", "source_id": "langchain-academy", "status": "new", "title": "Introduction to LangSmith Deployment Course Learn to deploy, manage, and control your agents with LangSmith Deployment.", "url": "https://academy.langchain.com/courses/langsmith-deployment"}], "last_discovery_month": null, "schema_version": 1, "source_checks": {"hf-learn": {"checked_at": "2026-10-28T17:00:30Z", "last_success_month": null, "note": "robots.txt 无法获取(network_error),本次跳过课程页检查", "status": "failed"}, "langchain-academy": {"checked_at": "2026-10-28T17:00:30Z", "last_success_month": "2026-10", "note": "", "status": "ok"}}}, "catalog": {"courses": [{"access_note": "OCW 内容公开;提交作业需账号", "cost_note": "OCW 内容公开;认证另看官方选项", "cost_status": "mixed", "effort_hours": {"max": 40, "min": 20, "note": "选学;零基础更长"}, "id": "C01", "kind": "video_course", "language": "英文", "manual_review": {"level": "A", "note": "已读取官方课程页面", "reviewed_on": "2026-10-28"}, "note": "按基础选学", "provider": "Harvard", "title": "CS50's Introduction to Programming with Python", "url": "https://cs50.harvard.edu/python/"}, {"access_note": "免费公开", "cost_note": "免费公开", "cost_status": "free_content", "effort_hours": {"max": 12, "min": 8, "note": ""}, "id": "C02", "kind": "documentation", "language": "中文", "manual_review": {"level": "A", "note": "已读取官方文档页面", "reviewed_on": "2026-10-28"}, "note": "流式传输按当前目录学习", "provider": "FastAPI", "title": "FastAPI 教程:用户指南", "url": "https://fastapi.tiangolo.com/zh/tutorial/"}, {"access_note": "教程公开;软件和托管服务需按对应许可获取", "cost_note": "教程公开;软件和托管服务按对应许可/套餐", "cost_status": "mixed", "effort_hours": {"max": 10, "min": 6, "note": ""}, "id": "C03", "kind": "documentation", "language": "英文", "manual_review": {"level": "A", "note": "已读取官方教程页面", "reviewed_on": "2026-10-28"}, "note": "部署练习中增加健康检查与环境配置", "provider": "Docker", "title": "Get started with Docker", "url": "https://docs.docker.com/get-started/"}, {"access_note": "仓库公开", "cost_note": "公开;模型调用可能收费", "cost_status": "mixed", "effort_hours": {"max": 20, "min": 12, "note": "选学"}, "id": "C04", "kind": "text_course", "language": "中文", "manual_review": {"level": "A", "note": "已读取仓库页面", "reviewed_on": "2026-10-28"}, "note": "以仓库当前目录为准", "provider": "Datawhale", "title": "LLM Universe:大模型应用开发", "url": "https://github.com/datawhalechina/llm-universe"}, {"access_note": "仓库公开;部分内容有配套视频", "cost_note": "公开;外部模型和服务另计", "cost_status": "mixed", "effort_hours": {"max": 40, "min": 25, "note": "选学"}, "id": "C05", "kind": "text_course", "language": "中文", "manual_review": {"level": "A", "note": "已读取仓库页面", "reviewed_on": "2026-10-28"}, "note": "第 3/4/7/8/9/10/12/14/16 章分阶段选读;暂跳 Agentic-RL", "provider": "Datawhale", "title": "Hello-Agents:从零开始构建智能体", "url": "https://github.com/datawhalechina/hello-agents"}, {"access_note": "部分实践/提交需账号", "cost_note": "免费课程;推理资源另计", "cost_status": "mixed", "effort_hours": {"max": 15, "min": 8, "note": "选学"}, "id": "C06", "kind": "text_course", "language": "英文", "manual_review": {"level": "A", "note": "已读取官方课程页面", "reviewed_on": "2026-10-28"}, "note": "Unit 3 Agentic RAG 与观测评测加餐对应阶段 4/5;原 README 分阶段表仅单列阶段 3 内容", "provider": "Hugging Face", "title": "Hugging Face AI Agents Course", "url": "https://huggingface.co/learn/agents-course/en/unit0/introduction"}, {"access_note": "发布应用需账号", "cost_note": "免费课程;资源另计", "cost_status": "mixed", "effort_hours": {"max": 12, "min": 8, "note": ""}, "id": "C07", "kind": "text_course", "language": "英文", "manual_review": {"level": "A", "note": "已读取官方课程页面", "reviewed_on": "2026-10-28"}, "note": "高级工作流选学", "provider": "Hugging Face × Anthropic", "title": "Hugging Face MCP Course", "url": "https://huggingface.co/learn/mcp-course/en/unit0/introduction"}, {"access_note": "注册学习", "cost_note": "页面标明免费;模型与托管服务另计", "cost_status": "mixed", "effort_hours": {"max": 25, "min": 15, "note": "官方视频 6h"}, "id": "C08", "kind": "video_course", "language": "英文", "manual_review": {"level": "A", "note": "已读取官方课程页面", "reviewed_on": "2026-10-28"}, "note": "模块 1–6 覆盖阶段 3–6", "provider": "LangChain Academy", "title": "Introduction to LangGraph — Python", "url": "https://academy.langchain.com/courses/intro-to-langgraph"}, {"access_note": "公开", "cost_note": "公开", "cost_status": "free_content", "effort_hours": {"max": 3, "min": 2, "note": ""}, "id": "C09", "kind": "article", "language": "英文", "manual_review": {"level": "A", "note": "已读取文章页面", "reviewed_on": "2026-10-28"}, "note": "工程文章,非课程;转为自己的上下文设计检查表", "provider": "Anthropic", "title": "Effective context engineering for AI agents", "url": "https://www.anthropic.com/research/effective-context-engineering-for-ai-agents"}, {"access_note": "文档公开;本仓库已有 CLI 用法", "cost_note": "文档公开;模型/云功能另计", "cost_status": "mixed", "effort_hours": {"max": 8, "min": 5, "note": ""}, "id": "C10", "kind": "documentation", "language": "英文", "manual_review": {"level": "A", "note": "已读取官方文档", "reviewed_on": "2026-10-28"}, "note": "先读仓库 evals/README.md 再运行", "provider": "Promptfoo", "title": "Promptfoo Intro", "url": "https://www.promptfoo.dev/docs/intro/"}, {"access_note": "官网公开访问", "cost_note": "官网标明免费", "cost_status": "free_content", "effort_hours": {"max": 10, "min": 6, "note": "选学"}, "id": "C11", "kind": "video_course", "language": "英文", "manual_review": {"level": "A", "note": "2023 年材料,工程原则有参考价值,API 和工具示例需核对", "reviewed_on": "2026-10-28"}, "note": "历史课程", "provider": "Full Stack Deep Learning", "title": "Full Stack LLM Bootcamp — Spring 2023", "url": "https://fullstackdeeplearning.com/llm-bootcamp/spring-2023/"}, {"access_note": "注册学习;详情页未直接核查", "cost_note": "官方摘要出现限时免费说明,当前权益需在课堂确认", "cost_status": "unknown", "effort_hours": {"max": 4, "min": 2, "note": ""}, "id": "C12", "kind": "video_course", "language": "英文", "manual_review": {"level": "B", "note": "官方目录确认存在,详情页抓取返回 403;实际模型调用沿用项目当前适配层", "reviewed_on": "2026-10-28"}, "note": "", "provider": "DeepLearning.AI × OpenAI", "title": "ChatGPT Prompt Engineering for Developers", "url": "https://www.deeplearning.ai/courses/chatgpt-prompt-eng"}, {"access_note": "注册学习;详情页未直接核查", "cost_note": "免费范围/PRO 作业以登录后页面为准", "cost_status": "unknown", "effort_hours": {"max": 5, "min": 3, "note": ""}, "id": "C13", "kind": "video_course", "language": "英文", "manual_review": {"level": "B", "note": "官方目录确认存在,详情页抓取返回 403;早期 LCEL/API 示例只用于概念对照", "reviewed_on": "2026-10-28"}, "note": "", "provider": "DeepLearning.AI × LangChain", "title": "Functions, Tools and Agents with LangChain", "url": "https://www.deeplearning.ai/courses/functions-tools-agents-langchain"}, {"access_note": "注册学习;详情页未直接核查", "cost_note": "费用待确认", "cost_status": "unknown", "effort_hours": {"max": 5, "min": 3, "note": ""}, "id": "C14", "kind": "video_course", "language": "英文", "manual_review": {"level": "B", "note": "官方目录确认存在,详情页抓取返回 403;另补 BM25 与权限过滤练习", "reviewed_on": "2026-10-28"}, "note": "", "provider": "DeepLearning.AI × Chroma", "title": "Advanced Retrieval for AI with Chroma", "url": "https://www.deeplearning.ai/courses/advanced-retrieval-for-ai"}, {"access_note": "注册学习;详情页未直接核查", "cost_note": "费用待确认", "cost_status": "unknown", "effort_hours": {"max": 5, "min": 3, "note": ""}, "id": "C15", "kind": "video_course", "language": "英文", "manual_review": {"level": "B", "note": "官方目录确认存在,详情页抓取返回 403;与 C08 模块 5 内容重叠时选一门", "reviewed_on": "2026-10-28"}, "note": "", "provider": "DeepLearning.AI × LangChain", "title": "Long-Term Agentic Memory With LangGraph", "url": "https://www.deeplearning.ai/courses/long-term-agentic-memory-with-langgraph"}, {"access_note": "注册学习;详情页未直接核查", "cost_note": "费用待确认", "cost_status": "unknown", "effort_hours": {"max": 6, "min": 4, "note": ""}, "id": "C16", "kind": "video_course", "language": "英文", "manual_review": {"level": "B", "note": "官方目录确认存在,详情页抓取返回 403;实践迁移到本仓库固定任务集", "reviewed_on": "2026-10-28"}, "note": "", "provider": "DeepLearning.AI × Arize AI", "title": "Evaluating AI Agents", "url": "https://www.deeplearning.ai/courses/evaluating-ai-agents"}, {"access_note": "注册学习;详情页未直接核查", "cost_note": "费用待确认", "cost_status": "unknown", "effort_hours": {"max": 6, "min": 4, "note": ""}, "id": "C17", "kind": "video_course", "language": "英文", "manual_review": {"level": "B", "note": "官方目录确认存在,详情页抓取返回 403;写一份可评测的 Skill", "reviewed_on": "2026-10-28"}, "note": "", "provider": "DeepLearning.AI × Anthropic", "title": "Agent Skills with Anthropic", "url": "https://www.deeplearning.ai/courses/agent-skills-with-anthropic"}, {"access_note": "注册学习;详情页未直接核查", "cost_note": "费用待确认", "cost_status": "unknown", "effort_hours": {"max": 5, "min": 3, "note": ""}, "id": "C18", "kind": "video_course", "language": "英文", "manual_review": {"level": "B", "note": "官方目录确认存在,详情页抓取返回 403;原目录标注适用阶段 5/6", "reviewed_on": "2026-10-28"}, "note": "", "provider": "DeepLearning.AI × CircleCI", "title": "Automated Testing for LLMOps", "url": "https://www.deeplearning.ai/courses/automated-testing-llmops"}, {"access_note": "官方文档公开", "cost_note": "文档免费;算力另计", "cost_status": "mixed", "effort_hours": {"max": 0, "min": 0, "note": "原目录未给出估算;需要私有化部署时开展"}, "id": "C19", "kind": "documentation", "language": "英文", "manual_review": {"level": "A", "note": "已读取官方文档", "reviewed_on": "2026-10-28"}, "note": "官方文档,非视频课;阶段 6 选学,需要私有化部署时开展,再读性能指标", "provider": "vLLM", "title": "vLLM Quickstart", "url": "https://docs.vllm.ai/en/latest/getting_started/quickstart/"}, {"access_note": "仓库公开", "cost_note": "公开;模型与运行资源另计", "cost_status": "mixed", "effort_hours": {"max": 0, "min": 0, "note": "原目录未给出估算;按所选综合项目场景开展"}, "id": "C20", "kind": "source_code", "language": "英文为主", "manual_review": {"level": "A", "note": "已读取仓库页面", "reviewed_on": "2026-10-28"}, "note": "源码与文档,非课程;研读时记录实际 commit", "provider": "ByteDance", "title": "DeerFlow 官方仓库", "url": "https://github.com/bytedance/deer-flow"}], "repo_links": [{"description": "画出请求、重试、返回和用量统计链路;配套模型配置文档", "label": "模型调用:models.py", "path": "platform/fde_product/models.py"}, {"description": "模型环境变量与网关配置说明", "label": "模型配置", "path": "docs/model-configuration.md"}, {"description": "区分分析与写入动作,检查校验与执行边界", "label": "工具与业务:business.py", "path": "platform/fde_product/business.py"}, {"description": "区分分析与写入动作,检查校验与执行边界", "label": "工具与业务:actions.py", "path": "platform/fde_product/actions.py"}, {"description": "追踪状态、澄清、确认与任务结束", "label": "Agent:agent.py", "path": "platform/fde_product/agent.py"}, {"description": "追踪状态、澄清、确认与任务结束", "label": "交互:interaction.py", "path": "platform/fde_product/interaction.py"}, {"description": "对照现有场景,补充学习用失败分类", "label": "评测说明", "path": "evals/README.md"}, {"description": "对照现有场景,补充学习用失败分类", "label": "产品测试", "path": "tests"}, {"description": "从执行记录定位模型或工具故障", "label": "可观测性", "path": "platform/fde_product/observability.py"}, {"description": "从业务目标推导指标、证据与接管节点", "label": "FDE W1 立项材料", "path": "course-materials/w01/00_使用说明.md"}], "schema_version": 1, "stages": [{"acceptance": ["带校验和测试的 API", "能从干净环境启动服务,运行测试,并根据日志定位一个请求失败原因"], "assignments": [{"course_id": "C01", "id": "S00-C01-01", "priority": "core", "sections": ["函数", "异常", "单元测试", "文件", "面向对象"], "why": "Python 基础补齐;courses.md 阶段 0 指定内容,按基础选学"}, {"course_id": "C02", "id": "S00-C02-01", "priority": "core", "sections": ["请求体", "响应模型", "错误处理", "依赖", "安全", "测试"], "why": "API 开发与校验基础,阶段 0 主修"}, {"course_id": "C03", "id": "S00-C03-01", "priority": "elective", "sections": ["容器", "镜像", "应用栈"], "why": "容器入门,阶段 0 选修"}], "deliverables": ["一个带测试的 API 服务"], "id": "S00", "objective": "能否独立开发与测试服务?", "prerequisites": [], "title": "工程基础"}, {"acceptance": ["模型适配、结构校验、错误分类", "既能处理成功响应,也能演示超时、非法输出与取消请求;每次调用可追踪模型、耗时和用量;结构合规与内容正确分别验证"], "assignments": [{"course_id": "C04", "id": "S01-C04-01", "priority": "core", "sections": ["模型 API 入门", "Prompt 内容"], "why": "中文主线:模型 API 与应用入门,阶段 1 主修"}, {"course_id": "C05", "id": "S01-C05-01", "priority": "core", "sections": ["第 3 章"], "why": "阶段 1 主修指定章节"}, {"course_id": "C02", "id": "S01-C02-01", "priority": "elective", "sections": ["流式传输"], "why": "流式响应实验,按当前目录学习;阶段 1 选修"}, {"course_id": "C12", "id": "S01-C12-01", "priority": "elective", "sections": ["指令、示例、迭代和文本处理"], "why": "Prompt 专项短课,阶段 1 选修;实际模型调用沿用项目当前适配层"}], "deliverables": ["LLM Gateway"], "id": "S01", "objective": "如何稳定调用模型?", "prerequisites": ["S00"], "title": "模型调用"}, {"acceptance": ["工具注册、校验、拒绝与审计", "非法参数在执行前被拒绝;越权调用留下记录;失败有明确错误;能从 Trace 中还原一次工具调用"], "assignments": [{"course_id": "C07", "id": "S02-C07-01", "priority": "core", "sections": ["架构", "Client/Server", "工具/资源/提示模板", "端到端应用"], "why": "协议主线:MCP 基础与端到端应用,阶段 2 主修;高级工作流选学"}, {"course_id": "C05", "id": "S02-C05-01", "priority": "core", "sections": ["第 10 章 MCP 部分"], "why": "阶段 2 主修指定章节"}, {"course_id": "C13", "id": "S02-C13-01", "priority": "elective", "sections": ["结构输出", "工具选择和路由"], "why": "Function Calling 专项短课,阶段 2 选修;早期 LCEL/API 示例只用于概念对照"}], "deliverables": ["Tool Runtime"], "id": "S02", "objective": "如何可靠执行工具调用?", "prerequisites": ["S01"], "title": "工具接入"}, {"acceptance": ["有终止条件和恢复能力的 Agent", "任务有明确终态;重复失败不会无限循环;变更能通过 diff 检查;测试结果和失败原因均可追踪"], "assignments": [{"course_id": "C08", "id": "S03-C08-01", "priority": "core", "sections": ["模块 1 图与 Agent", "模块 2 状态", "模块 3 人机协同"], "why": "框架主线:LangGraph 模块 1–3,阶段 3 主修"}, {"course_id": "C05", "id": "S03-C05-01", "priority": "core", "sections": ["第 4 章", "第 7 章"], "why": "阶段 3 主修选读章节"}, {"course_id": "C06", "id": "S03-C06-01", "priority": "elective", "sections": ["Unit 1", "Unit 2.3 LangGraph"], "why": "可替代部分基础阅读,阶段 3 选修"}], "deliverables": ["Codebase Agent v1"], "id": "S03", "objective": "如何完成并恢复多步任务?", "prerequisites": ["S02"], "title": "Agent 执行"}, {"acceptance": ["检索、引用、记忆与上下文预算", "使用固定问题集比较关键词检索、向量检索与混合检索;检查引用是否支持结论;上下文压缩后仍能保留目标、约束和未完成事项"], "assignments": [{"course_id": "C05", "id": "S04-C05-01", "priority": "core", "sections": ["第 8 章", "第 9 章"], "why": "阶段 4 主修指定章节"}, {"course_id": "C04", "id": "S04-C04-01", "priority": "core", "sections": ["知识库与 RAG 应用"], "why": "阶段 4 主修:知识库/RAG 内容"}, {"course_id": "C08", "id": "S04-C08-01", "priority": "core", "sections": ["模块 5 记忆"], "why": "阶段 4 主修:长期记忆"}, {"course_id": "C09", "id": "S04-C09-01", "priority": "elective", "sections": ["上下文取舍、检索、压缩与长任务"], "why": "上下文工程文章,阶段 4 选修;转为自己的上下文设计检查表"}, {"course_id": "C14", "id": "S04-C14-01", "priority": "elective", "sections": ["检索质量诊断、查询与召回优化"], "why": "检索专项短课,阶段 4 选修;另补 BM25 与权限过滤练习"}, {"course_id": "C15", "id": "S04-C15-01", "priority": "elective", "sections": ["长期记忆与 LangMem"], "why": "记忆专项短课,阶段 4 选修;与 C08 模块 5 内容重叠时选一门"}, {"course_id": "C06", "id": "S04-C06-01", "priority": "elective", "sections": ["Unit 3 Agentic RAG"], "why": "原目录把 C06 标注到阶段 3/4/5,本节对应 RAG 主题,按需选读"}], "deliverables": ["Codebase Agent v2"], "id": "S04", "objective": "如何提供准确且足够的上下文?", "prerequisites": ["S03"], "title": "上下文与知识"}, {"acceptance": ["版本比较、失败分析、受控协作", "在相同任务集和可比条件下输出版本对比;记录失败样本;抽查自动评分与人工判断的一致性;未观察到提升时保留结论"], "assignments": [{"course_id": "C05", "id": "S05-C05-01", "priority": "core", "sections": ["第 12 章"], "why": "阶段 5 主修指定章节"}, {"course_id": "C08", "id": "S05-C08-01", "priority": "core", "sections": ["模块 4 协作"], "why": "阶段 5 主修:多 Agent 并行与结果汇总"}, {"course_id": "C10", "id": "S05-C10-01", "priority": "core", "sections": ["配置", "断言", "Provider", "结果对比"], "why": "评测教程,阶段 5 主修;先读仓库 evals/README.md 再运行"}, {"course_id": "C16", "id": "S05-C16-01", "priority": "elective", "sections": ["系统化评测与迭代"], "why": "评测专项短课,阶段 5 选修;实践迁移到本仓库固定任务集"}, {"course_id": "C17", "id": "S05-C17-01", "priority": "elective", "sections": ["按需加载的技能"], "why": "Skill 专项短课,阶段 5 选修;写一份可评测的 Skill"}, {"course_id": "C18", "id": "S05-C18-01", "priority": "elective", "sections": ["把 LLM 评测接入变更检查和 CI"], "why": "持续测试专项短课,阶段 5 选修;原目录标注适用阶段 5/6"}], "deliverables": ["评测与协作平台"], "id": "S05", "objective": "如何复用能力并证明效果提升?", "prerequisites": ["S04"], "title": "协作与评测"}, {"acceptance": ["可部署、可诊断、可回退的版本", "在新环境启动;模拟一次外部工具故障并定位;切换和回滚一个配置版本;统计单任务成本;保存一次故障演练记录"], "assignments": [{"course_id": "C03", "id": "S06-C03-01", "priority": "core", "sections": ["镜像", "应用栈", "健康检查与环境配置"], "why": "阶段 6 主修;部署练习中增加健康检查与环境配置"}, {"course_id": "C08", "id": "S06-C08-01", "priority": "core", "sections": ["模块 6 部署"], "why": "阶段 6 主修:LangGraph 部署"}, {"course_id": "C11", "id": "S06-C11-01", "priority": "core", "sections": ["LLMOps"], "why": "阶段 6 主修;2023 年材料,工程原则有参考价值,API 和工具示例需核对"}, {"course_id": "C19", "id": "S06-C19-01", "priority": "elective", "sections": ["环境要求", "批量推理和在线服务", "性能指标"], "why": "自托管推理,阶段 6 选学;需要私有化部署时开展"}], "deliverables": ["可运行的交付版本"], "id": "S06", "objective": "如何部署、监控、回滚?", "prerequisites": ["S05"], "title": "生产工程"}, {"acceptance": ["可演示、可评测的综合项目", "需求与场景边界、架构图、可运行项目、演示任务、评测报告、失败案例、成本记录和部署手册"], "assignments": [{"course_id": "C05", "id": "S07-C05-01", "priority": "core", "sections": ["第 14 章", "第 16 章"], "why": "阶段 7 主修指定章节"}, {"course_id": "C20", "id": "S07-C20-01", "priority": "core", "sections": ["README 与架构", "入口、工具、上下文、沙箱、子代理、Skill 与持久化"], "why": "源码研读,阶段 7 主修;记录实际 commit"}, {"course_id": "C11", "id": "S07-C11-01", "priority": "elective", "sections": ["UX for Language User Interfaces", "askFSDL 项目讲解"], "why": "阶段 7 选修"}], "deliverables": ["综合项目与交付报告"], "id": "S07", "objective": "如何解决真实业务问题?", "prerequisites": ["S06"], "title": "综合交付"}], "weeks": [{"acceptance": ["需要 API 时由本地环境提供密钥"], "assignment_ids": ["S01-C04-01", "S01-C05-01"], "deliverables": ["调用流程图", "建立 5 个固定任务及预期结果"], "id": "W01", "practice": ["阅读 models.py 与模型配置", "梳理调用、错误、用量链路"], "repo_paths": ["platform/fde_product/models.py", "docs/model-configuration.md"], "stage_id": "S01", "study": ["C04 API 入门", "C05 第 3 章选读"]}, {"acceptance": ["区分格式正确与事实正确"], "assignment_ids": ["S01-C02-01", "S01-C04-01"], "deliverables": ["正常输出、非法输出、超时、取消的记录"], "id": "W02", "practice": ["在独立练习中实现需求信息提取、Schema 校验和错误分类", "补流式响应实验"], "repo_paths": [], "stage_id": "S01", "study": ["C02 请求/响应校验", "C04 Prompt 内容"]}, {"acceptance": ["非法参数在执行前被拒绝"], "assignment_ids": ["S02-C05-01"], "deliverables": ["工具清单、输入/输出/错误 Schema"], "id": "W03", "practice": ["阅读 business.py/actions.py", "独立实现工具注册与参数模型"], "repo_paths": ["platform/fde_product/business.py", "platform/fde_product/actions.py"], "stage_id": "S02", "study": ["C05 第 7 章工具相关内容"]}, {"acceptance": ["不据此宣称产品已有 MCP"], "assignment_ids": ["S02-C07-01", "S02-C05-01"], "deliverables": ["演示工具发现、调用、错误回传", "附权限与审计设计"], "id": "W04", "practice": ["独立 MCP Client/Server 练习,接入一个只读工具"], "repo_paths": [], "stage_id": "S02", "study": ["C07 Unit 1–2", "C05 第 10 章 MCP 部分"]}, {"acceptance": ["设置迭代次数和成本预算", "能正常结束和失败结束"], "assignment_ids": ["S03-C05-01", "S03-C08-01"], "deliverables": ["代码理解任务"], "id": "W05", "practice": ["用少量工具实现最小 Agent Loop", "阅读 agent.py 作对照"], "repo_paths": ["platform/fde_product/agent.py"], "stage_id": "S03", "study": ["C05 第 4 章", "C08 模块 1"]}, {"acceptance": ["明确重复执行如何避免副作用"], "assignment_ids": ["S03-C08-01"], "deliverables": ["状态图与中断恢复演示"], "id": "W06", "practice": ["阅读 agent.py/interaction.py", "在独立练习保存 Checkpoint"], "repo_paths": ["platform/fde_product/agent.py", "platform/fde_product/interaction.py"], "stage_id": "S03", "study": ["C08 模块 2–3 的状态与断点"]}, {"acceptance": ["演示取消、拒绝、失败和恢复路径"], "assignment_ids": ["S03-C08-01", "S00-C03-01"], "deliverables": ["生成变更 diff 与测试记录"], "id": "W07", "practice": ["独立 Codebase Agent 增加文件变更和测试", "限制目录与命令"], "repo_paths": [], "stage_id": "S03", "study": ["C08 模块 3 人机协同", "C03 容器基础"]}, {"acceptance": ["不使用客户数据推导事实"], "assignment_ids": ["S04-C04-01", "S04-C05-01"], "deliverables": ["10 个检索问题、相关证据标注、两种检索基线"], "id": "W08", "practice": ["使用公开代码和脱敏文档建索引", "先做关键词与向量检索"], "repo_paths": [], "stage_id": "S04", "study": ["C04 知识库/RAG", "C05 第 8 章"]}, {"acceptance": ["对齐阶段目标:检索、引用、记忆与上下文预算"], "assignment_ids": ["S04-C05-01", "S04-C09-01"], "deliverables": ["比较固定问题上的召回与引用质量", "输出 Context Debug Report"], "id": "W09", "practice": ["增加混合检索、引用和上下文预算", "必要时选 C14"], "repo_paths": [], "stage_id": "S04", "study": ["C05 第 9 章", "C09 工程文章"]}, {"acceptance": ["说明错误记忆和过期信息的处理"], "assignment_ids": ["S04-C08-01", "S04-C05-01"], "deliverables": ["记忆 Schema", "摘要后恢复任务"], "id": "W10", "practice": ["区分任务状态、项目约定和长期偏好", "测试更新与删除"], "repo_paths": [], "stage_id": "S04", "study": ["C08 模块 5", "C05 第 8 章记忆"]}, {"acceptance": ["任务覆盖正常、证据不足、超时、权限拒绝和恢复"], "assignment_ids": ["S05-C05-01", "S05-C10-01"], "deliverables": ["约 30 个学习任务", "评分规则"], "id": "W11", "practice": ["阅读 evals/README.md", "先用现有配置理解 7 个场景,再在学习副本扩充"], "repo_paths": ["evals/README.md"], "stage_id": "S05", "study": ["C05 第 12 章", "C10 配置与断言"]}, {"acceptance": ["对齐阶段目标:版本比较、失败分析、受控协作"], "assignment_ids": ["S05-C08-01"], "deliverables": ["比较成功率、耗时与成本", "写一个 Skill 的触发条件、步骤与验收规则"], "id": "W12", "practice": ["独立比较单 Agent 与多个只读分析角色", "C17 可选"], "repo_paths": [], "stage_id": "S05", "study": ["C08 模块 4 并行、子图、结果汇总"]}, {"acceptance": ["不只报平均分"], "assignment_ids": ["S05-C10-01", "S05-C05-01"], "deliverables": ["两个版本评测报告", "人工评分抽查", "失败分类与保留/回退结论"], "id": "W13", "practice": ["保留固定任务与独立保留集", "C16/C18 可选"], "repo_paths": [], "stage_id": "S05", "study": ["C10 结果比较", "C05 第 12 章复盘"]}, {"acceptance": ["涉及托管部署时先在本地完成交付包"], "assignment_ids": ["S06-C03-01", "S06-C08-01"], "deliverables": ["新环境启动记录", "配置说明"], "id": "W14", "practice": ["为独立练习打包", "整理服务配置、健康检查与版本信息"], "repo_paths": [], "stage_id": "S06", "study": ["C03 镜像与应用栈", "C08 模块 6"]}, {"acceptance": ["明确回放的外部依赖限制"], "assignment_ids": ["S06-C11-01"], "deliverables": ["Trace 定位报告", "成本统计", "回滚演练", "Runbook"], "id": "W15", "practice": ["研读 observability.py", "制造模型/工具超时、检索失败", "C19 按需选学"], "repo_paths": ["platform/fde_product/observability.py"], "stage_id": "S06", "study": ["C11 LLMOps"]}, {"acceptance": ["对齐阶段目标:可演示、可评测的综合项目"], "assignment_ids": ["S07-C05-01", "S07-C20-01"], "deliverables": ["场景说明、架构、任务集、权限边界、接管点和业务验收标准"], "id": "W16", "practice": ["二选一:研究报告系统或开发协作系统", "先固定实际版本"], "repo_paths": [], "stage_id": "S07", "study": ["C05 第 14/16 章", "C20 README 与架构"]}, {"acceptance": ["报告可回溯到来源和执行记录"], "assignment_ids": ["S07-C20-01"], "deliverables": ["一次正常任务和一次失败任务演示"], "id": "W17", "practice": ["完成端到端最小闭环:输入→工具→证据→输出→评测", "C11 项目讲解选学"], "repo_paths": [], "stage_id": "S07", "study": ["C20 按所选场景研读"]}, {"acceptance": ["对齐阶段目标:可演示、可评测的综合项目"], "assignment_ids": ["S07-C11-01"], "deliverables": ["可运行版本", "演示材料", "评测与成本报告", "已知限制", "部署手册与下一步"], "id": "W18", "practice": ["与 FDE 的需求澄清、fit-gap 和交付评价方法结合"], "repo_paths": [], "stage_id": "S07", "study": ["C11 UX 内容", "复盘原学习大纲"]}]}, "observations": {"courses": {"C01": {"checked_at": "2026-10-28T16:49:39Z", "consecutive_missing": 0, "content_changed": false, "final_url": "https://cs50.harvard.edu/python/", "http_status": 200, "last_good_hash": "7a53a882cf70d78f478b378f3f668ba30bee7b50b2321bde8d1b50b8b6b472bd", "last_success_at": "2026-10-28T16:49:39Z", "missing_run_id": null, "note": "首次建立内容基线", "status": "reachable"}, "C02": {"checked_at": "2026-10-28T16:49:39Z", "consecutive_missing": 0, "content_changed": false, "final_url": "https://fastapi.tiangolo.com/zh/tutorial/", "http_status": 200, "last_good_hash": "0a779884cab7d3d9c1fcaed1a1d23192965b6efd96414015c3649fa8dda92e27", "last_success_at": "2026-10-28T16:49:39Z", "missing_run_id": null, "note": "首次建立内容基线", "status": "reachable"}, "C03": {"checked_at": "2026-10-28T16:49:39Z", "consecutive_missing": 0, "content_changed": false, "final_url": "https://docs.docker.com/get-started/", "http_status": 200, "last_good_hash": "f30e703ec00af459be67e5705052557968e0fcab6251e3556831a53870575d9d", "last_success_at": "2026-10-28T16:49:39Z", "missing_run_id": null, "note": "首次建立内容基线", "status": "reachable"}, "C04": {"checked_at": "2026-10-28T16:49:39Z", "consecutive_missing": 0, "content_changed": false, "final_url": "https://github.com/datawhalechina/llm-universe", "http_status": 200, "last_good_hash": "aeef57709e7078222a9822e3be1d4aac4034c129f516327af1632a4a95a68c6a", "last_success_at": "2026-10-28T16:49:39Z", "missing_run_id": null, "note": "首次建立内容基线", "status": "reachable"}, "C05": {"checked_at": "2026-10-28T16:49:39Z", "consecutive_missing": 0, "content_changed": false, "final_url": "https://github.com/datawhalechina/hello-agents", "http_status": 200, "last_good_hash": "8dd6554504ffe4a6f30ab01341b5efd016025ec906681f1fc124a8d3f1f384a4", "last_success_at": "2026-10-28T16:49:39Z", "missing_run_id": null, "note": "首次建立内容基线", "status": "reachable"}, "C06": {"checked_at": "2026-10-28T16:49:39Z", "consecutive_missing": 0, "content_changed": false, "final_url": "https://huggingface.co/learn/agents-course/en/unit0/introduction", "http_status": 200, "last_good_hash": "029f21d7206bb1267a823ce6be98c37184a1f9d5e8e3d01a7d09652b21270a5e", "last_success_at": "2026-10-28T16:49:39Z", "missing_run_id": null, "note": "首次建立内容基线", "status": "reachable"}, "C07": {"checked_at": "2026-10-28T16:49:39Z", "consecutive_missing": 0, "content_changed": false, "final_url": "https://huggingface.co/learn/mcp-course/en/unit0/introduction", "http_status": 200, "last_good_hash": "3fb96365f573cbf57e0174cc11679a1e4bebf3ce920f4666c19747641fd2f91f", "last_success_at": "2026-10-28T16:49:39Z", "missing_run_id": null, "note": "首次建立内容基线", "status": "reachable"}, "C08": {"checked_at": "2026-10-28T16:49:39Z", "consecutive_missing": 0, "content_changed": false, "final_url": "https://academy.langchain.com/courses/intro-to-langgraph", "http_status": 200, "last_good_hash": "0d28963ea31ec659a0caa9b5db5bdaf3508f405babbe34c11531b0f4bab789c4", "last_success_at": "2026-10-28T16:49:39Z", "missing_run_id": null, "note": "首次建立内容基线", "status": "reachable"}, "C09": {"checked_at": "2026-10-28T16:49:39Z", "consecutive_missing": 0, "content_changed": false, "final_url": "https://www.anthropic.com/research/effective-context-engineering-for-ai-agents", "http_status": 200, "last_good_hash": "7599f7cece2f13f839f7d1e899d67b5503ad8002606ee1822e6fae0b8fbfca3c", "last_success_at": "2026-10-28T16:49:39Z", "missing_run_id": null, "note": "首次建立内容基线", "status": "reachable"}, "C10": {"checked_at": "2026-10-28T16:49:39Z", "consecutive_missing": 0, "content_changed": false, "final_url": "https://www.promptfoo.dev/docs/intro/", "http_status": 200, "last_good_hash": "9137c22814241214b8b891cd7f2cadec891892568f484c1bbe0cd3f0253793f6", "last_success_at": "2026-10-28T16:49:39Z", "missing_run_id": null, "note": "首次建立内容基线", "status": "reachable"}, "C11": {"checked_at": "2026-10-28T16:49:39Z", "consecutive_missing": 0, "content_changed": false, "final_url": "https://fullstackdeeplearning.com/llm-bootcamp/spring-2023/", "http_status": 200, "last_good_hash": "fe6efa7c892c9c256b6e34f9df4f72560495484edc2cb32f0c44ef69e28f38b5", "last_success_at": "2026-10-28T16:49:39Z", "missing_run_id": null, "note": "首次建立内容基线", "status": "reachable"}, "C12": {"checked_at": "2026-10-28T16:49:39Z", "consecutive_missing": 0, "content_changed": false, "final_url": "https://www.deeplearning.ai/courses/chatgpt-prompt-eng", "http_status": 200, "last_good_hash": "4061992562a430a649d5b3916fe773b808e725b0f83db694ec4e12a7796eac4e", "last_success_at": "2026-10-28T16:49:39Z", "missing_run_id": null, "note": "首次建立内容基线", "status": "reachable"}, "C13": {"checked_at": "2026-10-28T16:49:39Z", "consecutive_missing": 0, "content_changed": false, "final_url": "https://www.deeplearning.ai/courses/functions-tools-agents-langchain", "http_status": 200, "last_good_hash": "8f0fc21c404dbb1426b1b3f0740afd8551f78d6d4afca284d986a3c443951ecf", "last_success_at": "2026-10-28T16:49:39Z", "missing_run_id": null, "note": "首次建立内容基线", "status": "reachable"}, "C14": {"checked_at": "2026-10-28T16:49:39Z", "consecutive_missing": 0, "content_changed": false, "final_url": "https://www.deeplearning.ai/courses/advanced-retrieval-for-ai", "http_status": 200, "last_good_hash": "2eb2f651b0405f98e0de3689a5b5e5e33fc4356453dced11db5e601dd1f155df", "last_success_at": "2026-10-28T16:49:39Z", "missing_run_id": null, "note": "首次建立内容基线", "status": "reachable"}, "C15": {"checked_at": "2026-10-28T16:49:39Z", "consecutive_missing": 0, "content_changed": false, "final_url": "https://www.deeplearning.ai/courses/long-term-agentic-memory-with-langgraph", "http_status": 200, "last_good_hash": "21d0d66c744da7453e4c54cc2abe807497066dd9e8251c3efc5cca2fa8b50e4e", "last_success_at": "2026-10-28T16:49:39Z", "missing_run_id": null, "note": "首次建立内容基线", "status": "reachable"}, "C16": {"checked_at": "2026-10-28T16:49:39Z", "consecutive_missing": 0, "content_changed": false, "final_url": "https://www.deeplearning.ai/courses/evaluating-ai-agents", "http_status": 200, "last_good_hash": "e283101a00dcd5a95f9c416f198c3e60ccd13de5c638fe88b837ffcfe3a74fb0", "last_success_at": "2026-10-28T16:49:39Z", "missing_run_id": null, "note": "首次建立内容基线", "status": "reachable"}, "C17": {"checked_at": "2026-10-28T16:49:39Z", "consecutive_missing": 0, "content_changed": false, "final_url": "https://www.deeplearning.ai/courses/agent-skills-with-anthropic", "http_status": 200, "last_good_hash": "ad12569e95a374d3bc0583e962b15c581c835986100eaf79ee9de67883ea78fc", "last_success_at": "2026-10-28T16:49:39Z", "missing_run_id": null, "note": "首次建立内容基线", "status": "reachable"}, "C18": {"checked_at": "2026-10-28T16:49:39Z", "consecutive_missing": 0, "content_changed": false, "final_url": "https://www.deeplearning.ai/courses/automated-testing-llmops", "http_status": 200, "last_good_hash": "d2f28abbd0b5efdbade192672cd8364e7f2f35dc5fe18e72382e8a6c08a063d9", "last_success_at": "2026-10-28T16:49:39Z", "missing_run_id": null, "note": "首次建立内容基线", "status": "reachable"}, "C19": {"checked_at": "2026-10-28T16:49:39Z", "consecutive_missing": 0, "content_changed": false, "final_url": "https://docs.vllm.ai/en/latest/getting_started/quickstart/", "http_status": 200, "last_good_hash": "5622664e4abaccfa1b99f28619bb3cc383fdd9056aa99e2d8a86ef76f772a56d", "last_success_at": "2026-10-28T16:49:39Z", "missing_run_id": null, "note": "首次建立内容基线", "status": "reachable"}, "C20": {"checked_at": "2026-10-28T16:49:39Z", "consecutive_missing": 0, "content_changed": false, "final_url": "https://github.com/bytedance/deer-flow", "http_status": 200, "last_good_hash": "bce9ea0f6d93890ffab4cfcbb606e3d14a1b94d9bdcdf215c02ef7c81f84483d", "last_success_at": "2026-10-28T16:49:39Z", "missing_run_id": null, "note": "首次建立内容基线", "status": "reachable"}}, "last_run_at": "2026-10-28T16:49:39Z", "schema_version": 1}};
+/* PROGRESS-CORE-START */
+var LEARNING_HUB_PROGRESS = (function () {
+  "use strict";
+  var STATUSES = ["未开始", "进行中", "已完成", "待复盘"];
+  function validateImport(raw, knownAssignmentIds, knownWeekIds) {
+    if (raw === null || typeof raw !== "object" || Array.isArray(raw)) {
+      return { ok: false, error: "导入数据必须是 JSON 对象;导入已拒绝,本机进度未修改" };
+    }
+    if (raw.schema_version !== 1) {
+      return {
+        ok: false,
+        error: "schema_version 必须为 1,当前为 " + JSON.stringify(raw.schema_version) + ";导入已拒绝,本机进度未修改"
+      };
+    }
+    var sections = [["assignments", knownAssignmentIds], ["weeks", knownWeekIds]];
+    var cleaned = {};
+    var ignored = [];
+    for (var i = 0; i < sections.length; i++) {
+      var name = sections[i][0];
+      var known = sections[i][1];
+      var value = raw[name];
+      if (value === undefined || value === null) { cleaned[name] = {}; continue; }
+      if (typeof value !== "object" || Array.isArray(value)) {
+        return { ok: false, error: name + " 必须是对象;导入已拒绝,本机进度未修改" };
+      }
+      var out = {};
+      for (var id in value) {
+        if (!Object.prototype.hasOwnProperty.call(value, id)) { continue; }
+        if (known.indexOf(id) === -1) { ignored.push(id); continue; }
+        var status = value[id];
+        if (STATUSES.indexOf(status) === -1) {
+          return {
+            ok: false,
+            error: name + "." + id + " 含非法状态值 " + JSON.stringify(status) + ";导入已拒绝,本机进度未修改"
+          };
+        }
+        out[id] = status;
+      }
+      cleaned[name] = out;
+    }
+    var progress = { schema_version: 1, assignments: cleaned.assignments, weeks: cleaned.weeks };
+    for (var key in raw) {
+      if (!Object.prototype.hasOwnProperty.call(raw, key)) { continue; }
+      if (key === "schema_version" || key === "assignments" || key === "weeks") { continue; }
+      progress[key] = raw[key];
+    }
+    return { ok: true, progress: progress, ignored: ignored };
+  }
+  return { STATUSES: STATUSES, validateImport: validateImport };
+})();
+/* PROGRESS-CORE-END */
+(function () {
+  "use strict";
+  var D = window.LEARNING_HUB_DATA;
+  var catalog = D.catalog || {};
+  var obsByCourse = (D.observations && D.observations.courses) || {};
+  var candidateItems = (D.candidates && D.candidates.candidates) || [];
+  var courses = catalog.courses || [];
+  var stages = catalog.stages || [];
+  var weeks = catalog.weeks || [];
+  var repoLinks = catalog.repo_links || [];
+
+  var KIND = {
+    video_course: "视频课", text_course: "图文课", documentation: "文档教程",
+    article: "文章", source_code: "源码"
+  };
+  var COST = { free_content: "内容免费", mixed: "部分免费", unknown: "费用待核查" };
+  var COST_CLASS = { free_content: "free", mixed: "mixed", unknown: "unknown-cost" };
+  var PRIORITY = { core: "主修", elective: "选修" };
+  var PRIORITY_CLASS = { core: "core", elective: "elective" };
+  var OBS_STATUS = {
+    reachable: ["可达", "status-ok"], redirected: ["重定向", "status-ok"],
+    restricted: ["受限(403/登录)", "status-warn"], rate_limited: ["限流", "status-warn"],
+    missing_once: ["单次缺失", "status-warn"], likely_unavailable: ["疑似失效", "status-bad"],
+    network_error: ["网络错误", "status-warn"], unsupported_content: ["正文未定位", "status-warn"]
+  };
+  var STATUS_CLASS = {
+    "未开始": "st-idle", "进行中": "st-doing", "已完成": "st-done", "待复盘": "st-review"
+  };
+
+  function el(tag, attrs) {
+    var node = document.createElement(tag);
+    if (attrs) {
+      Object.keys(attrs).forEach(function (key) {
+        var value = attrs[key];
+        if (key === "text") { node.textContent = value; }
+        else if (key === "class") { node.className = value; }
+        else { node.setAttribute(key, value); }
+      });
+    }
+    for (var i = 2; i < arguments.length; i++) {
+      var child = arguments[i];
+      if (child === null || child === undefined) { continue; }
+      node.appendChild(typeof child === "string" ? document.createTextNode(child) : child);
+    }
+    return node;
+  }
+  function badge(text, cls) { return el("span", { class: "badge " + cls, text: text }); }
+  function courseLink(courseId) {
+    var course = coursesById[courseId];
+    if (!course) { return el("span", { text: courseId }); }
+    return el("a", { href: course.url, target: "_blank", rel: "noopener", text: courseId });
+  }
+  function progressButton(kind, id) {
+    return el("button", { class: "pbtn", type: "button", "data-kind": kind, "data-id": id, text: "未开始" });
+  }
+
+  var coursesById = {}, stagesById = {};
+  var allAssignmentIds = [], allWeekIds = [];
+  courses.forEach(function (c) { coursesById[c.id] = c; });
+  stages.forEach(function (s) {
+    stagesById[s.id] = s;
+    s.assignments.forEach(function (a) { allAssignmentIds.push(a.id); });
+  });
+  weeks.forEach(function (w) { allWeekIds.push(w.id); });
+
+  // 顶部导航与统计
+  var toc = document.getElementById("toc");
+  [["#progress", "我的进度"], ["#stages", "学习阶段"], ["#courses", "全部资源"],
+   ["#weeks", "18 周计划"], ["#repos", "研读入口"], ["#candidates", "候选课程"]].forEach(function (pair) {
+    toc.appendChild(el("a", { href: pair[0], text: pair[1] }));
+  });
+  document.getElementById("meta-line").textContent =
+    courses.length + " 门资源 · " + stages.length + " 个阶段 · " + weeks.length + " 周实践 · 数据由 catalog.json 生成,人工核查日期 2026-10-28";
+  var stats = document.getElementById("stats");
+  [[courses.length, "门资源"], [stages.length, "个阶段"], [weeks.length, "周实践"],
+   [allAssignmentIds.length, "个指定内容"], [candidateItems.length, "个候选(未纳入)"]].forEach(function (pair) {
+    stats.appendChild(el("div", { class: "stat" },
+      el("b", { text: String(pair[0]) }), el("span", { text: pair[1] })));
+  });
+
+  var observedCount = Object.keys(obsByCourse).length;
+  var checkNote = document.getElementById("check-note");
+  if (observedCount === 0) {
+    checkNote.textContent = "来源检查:尚未检查。自动检查结果会写入 learning/data/observations.json 后随页面重建展示;在检查之前,页面不编造任何检查日期或结论。";
+  } else {
+    checkNote.textContent = "来源检查:已覆盖 " + observedCount + " 门课程,最近运行 " +
+      (D.observations.last_run_at || "未知时间") + "(UTC)。403/429/超时表示访问受限或网络问题,不等同于课程下架。";
+  }
+
+  // 阶段与指定内容
+  var stageList = document.getElementById("stage-list");
+  stages.forEach(function (stage) {
+    var pre = stage.prerequisites && stage.prerequisites.length
+      ? "前置:" + stage.prerequisites.join(" → ") : "无前置";
+    var card = el("div", { class: "card", "data-stage": stage.id },
+      el("h3", { text: stage.id + " " + stage.title }),
+      el("p", { class: "obj", text: stage.objective + " · " + pre }),
+      el("ul", { class: "plain" },
+        el("li", null, el("b", { text: "阶段交付:" }), stage.deliverables.join(";")),
+        el("li", null, el("b", { text: "验收:" }), stage.acceptance.join(";")))
+    );
+    var tbody = el("tbody", null);
+    stage.assignments.forEach(function (assignment) {
+      var course = coursesById[assignment.course_id] || {};
+      var searchBlob = (
+        assignment.id + " " + assignment.course_id + " " + (course.title || "") + " " +
+        (course.provider || "") + " " + (course.language || "") + " " + (KIND[course.kind] || "") + " " +
+        assignment.sections.join(" ") + " " + assignment.why
+      ).toLowerCase();
+      tbody.appendChild(el("tr", null,
+        el("td", { text: assignment.id }),
+        el("td", null,
+          courseLink(assignment.course_id),
+          el("div", { class: "note", text: (course.title || "") + " · " + (course.language || "") + " · " + (KIND[course.kind] || course.kind || "") })),
+        el("td", null, badge(PRIORITY[assignment.priority] || assignment.priority, PRIORITY_CLASS[assignment.priority] || "")),
+        el("td", { text: assignment.sections.join("、") }),
+        el("td", { text: assignment.why }),
+        el("td", null, progressButton("assignments", assignment.id)))
+      );
+      var row = tbody.lastChild;
+      row.setAttribute("data-language", course.language || "");
+      row.setAttribute("data-kind", course.kind || "");
+      row.setAttribute("data-priority", assignment.priority);
+      row.setAttribute("data-search", searchBlob);
+    });
+    card.appendChild(el("div", { class: "wraptable" },
+      el("table", null,
+        el("thead", null, el("tr", null,
+          el("th", { text: "作业 ID" }), el("th", { text: "课程" }), el("th", { text: "优先级" }),
+          el("th", { text: "指定章节" }), el("th", { text: "为什么学" }), el("th", { text: "进度" }))),
+        tbody)));
+    card.appendChild(el("div", { class: "empty-note stage-empty", hidden: true,
+      text: "该筛选组合下本阶段没有匹配内容。" }));
+    stageList.appendChild(card);
+  });
+
+  // 资源表
+  var courseTable = document.getElementById("course-table");
+  courseTable.appendChild(el("thead", null, el("tr", null,
+    el("th", { text: "ID" }), el("th", { text: "课程 / 资源" }), el("th", { text: "提供方" }),
+    el("th", { text: "语言" }), el("th", { text: "形式" }), el("th", { text: "访问与费用" }),
+    el("th", { text: "建议投入" }), el("th", { text: "核查" }), el("th", { text: "最后检查" }))));
+  var courseBody = el("tbody", null);
+  courses.forEach(function (course) {
+    var effort = course.effort_hours;
+    var effortText = (effort.min === 0 && effort.max === 0)
+      ? "原目录未估算" : (effort.min === effort.max ? effort.min + "h" : effort.min + "–" + effort.max + "h");
+    if (effort.note) { effortText += ";" + effort.note; }
+    var review = course.manual_review;
+    var obs = obsByCourse[course.id];
+    var checkCell;
+    if (!obs) {
+      checkCell = el("span", { class: "badge status-idle", text: "尚未检查" });
+    } else {
+      var statusInfo = OBS_STATUS[obs.status] || [obs.status, "status-warn"];
+      checkCell = el("span", { class: "badge " + statusInfo[1],
+        text: statusInfo[0] + (obs.checked_at ? " · " + obs.checked_at.slice(0, 10) : "") });
+    }
+    var priorities = [];
+    var stageIds = [];
+    stages.forEach(function (stage) {
+      stage.assignments.forEach(function (assignment) {
+        if (assignment.course_id !== course.id) { return; }
+        stageIds.push(stage.id);
+        if (priorities.indexOf(assignment.priority) === -1) { priorities.push(assignment.priority); }
+      });
+    });
+    var searchBlob = (
+      course.id + " " + course.title + " " + course.provider + " " + course.language + " " +
+      (KIND[course.kind] || "") + " " + course.access_note + " " + course.cost_note + " " +
+      (course.note || "") + " " + priorities.join(" ")
+    ).toLowerCase();
+    var row = el("tr", null,
+      el("td", { text: course.id }),
+      el("td", null,
+        el("a", { href: course.url, target: "_blank", rel: "noopener", text: course.title }),
+        course.note ? el("div", { class: "note", text: course.note }) : null),
+      el("td", { text: course.provider }),
+      el("td", { text: course.language }),
+      el("td", { text: KIND[course.kind] || course.kind }),
+      el("td", null,
+        badge(COST[course.cost_status] || course.cost_status, COST_CLASS[course.cost_status] || "status-idle"),
+        el("div", { class: "note", text: course.access_note + ";费用:" + course.cost_note })),
+      el("td", { text: effortText }),
+      el("td", null, badge(review.level, "review" + review.level),
+        el("div", { class: "note", text: review.reviewed_on + (review.note ? ";" + review.note : "") })),
+      el("td", null, checkCell));
+    row.setAttribute("data-language", course.language);
+    row.setAttribute("data-kind", course.kind);
+    row.setAttribute("data-priorities", priorities.join(" "));
+    row.setAttribute("data-stages", stageIds.join(" "));
+    row.setAttribute("data-search", searchBlob);
+    courseBody.appendChild(row);
+  });
+  courseTable.appendChild(courseBody);
+  document.getElementById("dl-note").textContent =
+    "C12–C18 由 DeepLearning.AI 官方目录确认存在,详情页直接访问曾返回 403;费用未确认,不作为必修依赖,主线均有公开替代入口。";
+
+  // 周计划
+  var weekTable = document.getElementById("week-table");
+  weekTable.appendChild(el("thead", null, el("tr", null,
+    el("th", { text: "周" }), el("th", { text: "阶段" }), el("th", { text: "必修内容(作业 ID)" }),
+    el("th", { text: "实践 / 仓库关联" }), el("th", { text: "本周交付" }), el("th", { text: "验收" }),
+    el("th", { text: "进度" }))));
+  var weekBody = el("tbody", null);
+  weeks.forEach(function (week) {
+    var stage = stagesById[week.stage_id];
+    var assignmentsCell = el("div", null);
+    week.assignment_ids.forEach(function (assignmentId, index) {
+      if (index > 0) { assignmentsCell.appendChild(document.createTextNode(";")); }
+      var courseId = assignmentId.split("-")[1];
+      assignmentsCell.appendChild(courseLink(courseId));
+      assignmentsCell.appendChild(document.createTextNode(" " + assignmentId));
+    });
+    weekBody.appendChild(el("tr", null,
+      el("td", { text: week.id }),
+      el("td", { text: stage ? stage.id + " " + stage.title : week.stage_id }),
+      el("td", null, el("div", { text: week.study.join(";") }), assignmentsCell),
+      el("td", null,
+        el("div", { text: week.practice.join(";") }),
+        week.repo_paths.length ? el("div", { class: "note", text: "仓库:" + week.repo_paths.join(";") }) : null),
+      el("td", { text: week.deliverables.join(";") }),
+      el("td", { text: week.acceptance.join(";") }),
+      el("td", null, progressButton("weeks", week.id))));
+  });
+  weekTable.appendChild(weekBody);
+
+  // 研读入口
+  var repoTable = document.getElementById("repo-table");
+  repoTable.appendChild(el("thead", null, el("tr", null,
+    el("th", { text: "入口" }), el("th", { text: "路径" }), el("th", { text: "学习动作" }))));
+  var repoBody = el("tbody", null);
+  repoLinks.forEach(function (link) {
+    repoBody.appendChild(el("tr", null,
+      el("td", { text: link.label }),
+      el("td", null, el("a", { href: "../" + link.path, text: link.path })),
+      el("td", { text: link.description })));
+  });
+  repoTable.appendChild(repoBody);
+
+  // 候选课程
+  var candidateList = document.getElementById("candidate-list");
+  if (candidateItems.length === 0) {
+    candidateList.appendChild(el("div", { class: "card note",
+      text: "尚未运行候选发现,或暂无候选。发现结果只来自已配置的官方目录(Hugging Face Learn、LangChain Academy),不会自动写入学习路径;是否纳入由人工决定。" }));
+  } else {
+    var cTable = el("table", null,
+      el("thead", null, el("tr", null,
+        el("th", { text: "标题" }), el("th", { text: "来源" }), el("th", { text: "状态" }),
+        el("th", { text: "首次发现" }), el("th", { text: "最近发现" }), el("th", { text: "备注" }))),
+      el("tbody", null));
+    candidateItems.forEach(function (item) {
+      cTable.lastChild.appendChild(el("tr", null,
+        el("td", null, el("a", { href: item.url, target: "_blank", rel: "noopener", text: item.title || item.url })),
+        el("td", { text: item.source_id || "" }),
+        el("td", { text: item.status || "" }),
+        el("td", { text: (item.first_seen_at || "").slice(0, 10) }),
+        el("td", { text: (item.last_seen_at || "").slice(0, 10) }),
+        el("td", { text: item.note || "" })));
+    });
+    candidateList.appendChild(el("div", { class: "wraptable" }, cTable));
+  }
+
+  // ------------------------------------------------------------------
+  // 筛选与搜索
+  // ------------------------------------------------------------------
+  var filterState = { q: "", stage: "", language: "", kind: "", priority: "" };
+  var fSearch = document.getElementById("f-search");
+  var fStage = document.getElementById("f-stage");
+  var fLanguage = document.getElementById("f-language");
+  var fKind = document.getElementById("f-kind");
+  var fPriority = document.getElementById("f-priority");
+  var fCount = document.getElementById("f-count");
+
+  function fillSelect(select, options, label) {
+    select.appendChild(el("option", { value: "", text: label }));
+    options.forEach(function (pair) {
+      select.appendChild(el("option", { value: pair[0], text: pair[1] }));
+    });
+  }
+  var languageOptions = [];
+  var kindOptions = [];
+  courses.forEach(function (course) {
+    if (languageOptions.indexOf(course.language) === -1) { languageOptions.push(course.language); }
+    if (!kindOptions.some(function (pair) { return pair[0] === course.kind; })) {
+      kindOptions.push([course.kind, KIND[course.kind] || course.kind]);
+    }
+  });
+  fillSelect(fStage, stages.map(function (s) { return [s.id, s.id + " " + s.title]; }), "全部阶段");
+  fillSelect(fLanguage, languageOptions.map(function (l) { return [l, l]; }), "全部语言");
+  fillSelect(fKind, kindOptions, "全部类型");
+  fillSelect(fPriority, [["core", "主修"], ["elective", "选修"]], "主修+选修");
+
+  function rowMatches(row, checkStage) {
+    if (filterState.language && row.getAttribute("data-language") !== filterState.language) { return false; }
+    if (filterState.kind && row.getAttribute("data-kind") !== filterState.kind) { return false; }
+    if (filterState.priority) {
+      var single = row.getAttribute("data-priority");
+      var multi = row.getAttribute("data-priorities");
+      var hit = single ? single === filterState.priority
+        : (multi ? multi.split(" ").indexOf(filterState.priority) !== -1 : true);
+      if (!hit) { return false; }
+    }
+    if (checkStage && filterState.stage &&
+        (row.getAttribute("data-stages") || "").split(" ").indexOf(filterState.stage) === -1) { return false; }
+    if (filterState.q && (row.getAttribute("data-search") || "").indexOf(filterState.q) === -1) { return false; }
+    return true;
+  }
+
+  function applyFilters() {
+    var rowFiltersActive = Boolean(filterState.q || filterState.language || filterState.kind || filterState.priority);
+    var visibleCourses = 0;
+    var visibleRows = 0;
+    var visibleCards = 0;
+    courseBody.querySelectorAll("tr").forEach(function (row) {
+      var show = rowMatches(row, true);
+      row.hidden = !show;
+      if (show) { visibleCourses += 1; }
+    });
+    stageList.querySelectorAll(".card").forEach(function (card) {
+      if (filterState.stage && card.getAttribute("data-stage") !== filterState.stage) {
+        card.hidden = true;
+        return;
+      }
+      card.hidden = false;
+      var cardRows = 0;
+      card.querySelectorAll("tbody tr").forEach(function (row) {
+        row.hidden = !rowMatches(row, false);
+        if (!row.hidden) { cardRows += 1; visibleRows += 1; }
+      });
+      var empty = card.querySelector(".stage-empty");
+      if (empty) { empty.hidden = !(rowFiltersActive && cardRows === 0); }
+      visibleCards += 1;
+    });
+    document.getElementById("empty-courses").hidden = visibleCourses !== 0;
+    courseTable.parentElement.hidden = visibleCourses === 0;
+    document.getElementById("empty-stages").hidden = visibleCards !== 0;
+    fCount.textContent = "当前显示 " + visibleCourses + "/" + courses.length +
+      " 门资源 · " + visibleRows + "/" + allAssignmentIds.length + " 条指定内容";
+  }
+
+  fSearch.addEventListener("input", function () { filterState.q = fSearch.value.trim().toLowerCase(); applyFilters(); });
+  [fStage, fLanguage, fKind, fPriority].forEach(function (select) {
+    select.addEventListener("change", function () {
+      filterState.stage = fStage.value;
+      filterState.language = fLanguage.value;
+      filterState.kind = fKind.value;
+      filterState.priority = fPriority.value;
+      applyFilters();
+    });
+  });
+  document.getElementById("f-clear").addEventListener("click", function () {
+    fSearch.value = ""; fStage.value = ""; fLanguage.value = ""; fKind.value = ""; fPriority.value = "";
+    filterState = { q: "", stage: "", language: "", kind: "", priority: "" };
+    applyFilters();
+  });
+  applyFilters();
+
+  // ------------------------------------------------------------------
+  // 个人进度(localStorage;不可用时降级为临时进度)
+  // ------------------------------------------------------------------
+  var PROGRESS_KEY = "learning-hub.progress.v1";
+  var STATUSES = LEARNING_HUB_PROGRESS.STATUSES;
+  var storage = (function () {
+    try {
+      var t = window.localStorage;
+      t.setItem("__learning_hub_test__", "1");
+      t.removeItem("__learning_hub_test__");
+      return t;
+    } catch (e) { return null; }
+  })();
+  var storageNote = document.getElementById("storage-note");
+  function showStorageNote(text) { storageNote.textContent = text; storageNote.hidden = false; }
+  var importResult = document.getElementById("import-result");
+  function reportImport(result) {
+    if (result.ok) {
+      importResult.textContent = result.ignored.length
+        ? "导入成功(已替换本机进度);忽略未知 ID:" + result.ignored.join("、") + "。"
+        : "导入成功(已替换本机进度)。";
+    } else {
+      importResult.textContent = "导入失败:" + result.error;
+    }
+    return result;
+  }
+
+  function emptyProgress() { return { schema_version: 1, assignments: {}, weeks: {} }; }
+  var progress = (function () {
+    if (!storage) {
+      showStorageNote("当前环境无法本机保存(localStorage 不可用):进度仅保留在本次打开的页面中,关闭即丢失;可导出 JSON 备份。");
+      return emptyProgress();
+    }
+    var text;
+    try { text = storage.getItem(PROGRESS_KEY); } catch (e) { return emptyProgress(); }
+    if (!text) { return emptyProgress(); }
+    try {
+      var parsed = JSON.parse(text);
+      var check = LEARNING_HUB_PROGRESS.validateImport(parsed, allAssignmentIds, allWeekIds);
+      if (!check.ok) {
+        showStorageNote("本机进度数据不符合当前格式,已忽略(" + check.error + ");页面可正常阅读,可重新标记或导入备份。");
+        return emptyProgress();
+      }
+      return check.progress;
+    } catch (e) {
+      showStorageNote("本机进度 JSON 损坏,已忽略;页面可正常阅读,可重新标记或导入备份。");
+      return emptyProgress();
+    }
+  })();
+
+  function saveProgress() {
+    if (!storage) { return; }
+    try { storage.setItem(PROGRESS_KEY, JSON.stringify(progress)); }
+    catch (e) { showStorageNote("进度保存失败:进度仅在本次页面有效;请导出 JSON 备份。"); }
+  }
+  function statusOf(kind, id) {
+    return (progress[kind] && progress[kind][id]) || "未开始";
+  }
+  function paintButton(btn, status) {
+    btn.textContent = status;
+    btn.className = "pbtn " + (STATUS_CLASS[status] || "st-idle");
+  }
+  function refreshProgressUI() {
+    document.querySelectorAll(".pbtn").forEach(function (btn) {
+      paintButton(btn, statusOf(btn.getAttribute("data-kind"), btn.getAttribute("data-id")));
+    });
+    updateSummary();
+  }
+  function updateSummary() {
+    var lines = [];
+    [["assignments", allAssignmentIds.length, "作业"], ["weeks", allWeekIds.length, "周"]].forEach(function (item) {
+      var kind = item[0], total = item[1], label = item[2];
+      var done = 0, doing = 0, review = 0;
+      Object.keys(progress[kind] || {}).forEach(function (id) {
+        if (allAssignmentIds.indexOf(id) === -1 && allWeekIds.indexOf(id) === -1) { return; }
+        if (progress[kind][id] === "已完成") { done += 1; }
+        else if (progress[kind][id] === "进行中") { doing += 1; }
+        else if (progress[kind][id] === "待复盘") { review += 1; }
+      });
+      lines.push(label + ":已完成 " + done + "/" + total + "、进行中 " + doing + "、待复盘 " + review);
+    });
+    document.getElementById("progress-summary").textContent = lines.join(";") + "。";
+  }
+
+  document.addEventListener("click", function (ev) {
+    var btn = ev.target && ev.target.closest ? ev.target.closest(".pbtn") : null;
+    if (!btn) { return; }
+    var kind = btn.getAttribute("data-kind");
+    var id = btn.getAttribute("data-id");
+    var current = statusOf(kind, id);
+    var next = STATUSES[(STATUSES.indexOf(current) + 1) % STATUSES.length];
+    if (!progress[kind]) { progress[kind] = {}; }
+    progress[kind][id] = next;
+    saveProgress();
+    paintButton(btn, next);
+    updateSummary();
+  });
+
+  document.getElementById("btn-export").addEventListener("click", function () {
+    var text = window.LEARNING_HUB_EXPORT();
+    try {
+      var blob = new Blob([text], { type: "application/json" });
+      var url = URL.createObjectURL(blob);
+      var a = el("a", { href: url, download: "learning-hub-progress.json" });
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+      importResult.textContent = "已导出当前进度(JSON 下载);可重新导入恢复。";
+    } catch (e) {
+      importResult.textContent = "导出失败:" + e.message;
+    }
+  });
+  document.getElementById("file-import").addEventListener("change", function (ev) {
+    var file = ev.target.files && ev.target.files[0];
+    ev.target.value = "";
+    if (!file) { return; }
+    var reader = new FileReader();
+    reader.onload = function () { reportImport(window.LEARNING_HUB_APPLY_IMPORT(String(reader.result))); };
+    reader.onerror = function () { reportImport({ ok: false, error: "读取文件失败" }); };
+    reader.readAsText(file, "utf-8");
+  });
+  document.getElementById("btn-clear").addEventListener("click", function () {
+    progress = emptyProgress();
+    saveProgress();
+    refreshProgressUI();
+    importResult.textContent = "已清空本机进度。";
+  });
+
+  window.LEARNING_HUB_APPLY_IMPORT = function (text) {
+    var parsed;
+    try { parsed = JSON.parse(text); }
+    catch (e) { return { ok: false, error: "不是合法 JSON:" + e.message + ";本机进度未修改" }; }
+    var result = LEARNING_HUB_PROGRESS.validateImport(parsed, allAssignmentIds, allWeekIds);
+    if (!result.ok) { return result; }
+    progress = result.progress;
+    saveProgress();
+    refreshProgressUI();
+    return result;
+  };
+  window.LEARNING_HUB_EXPORT = function () {
+    return JSON.stringify(progress, null, 2);
+  };
+
+  refreshProgressUI();
+})();
+</script>
+</body>
+</html>

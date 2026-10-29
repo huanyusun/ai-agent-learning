@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "sources": [
+    {
+      "id": "hf-learn",
+      "url": "https://huggingface.co/learn",
+      "mode": "html_links",
+      "allowed_hosts": ["huggingface.co"],
+      "item_path_prefix": "/learn/",
+      "enabled": true,
+      "note": "Hugging Face Learn 官方目录;只接纳同域 /learn/ 下的课程入口"
+    },
+    {
+      "id": "langchain-academy",
+      "url": "https://academy.langchain.com/",
+      "mode": "html_links",
+      "allowed_hosts": ["academy.langchain.com"],
+      "item_path_prefix": "/courses/",
+      "enabled": true,
+      "note": "LangChain Academy 官方目录;只接纳同域 /courses/ 下的链接"
+    }
+  ],
+  "course_rules": {}
+}

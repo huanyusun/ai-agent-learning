@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<!-- 由 tools/learning_hub 生成;请勿手工编辑,改动会被 build 覆盖。
+     数据来源:learning/data/catalog.json;重建:python3 -m tools.learning_hub build;
+     漂移检查:python3 -m tools.learning_hub build --check。
+     页面结构与样式源文件:learning/web/template.html。 -->
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Agent 工程课程中心</title>
+<style>
+:root {
+  --bg: #f6f7f9;
+  --card: #ffffff;
+  --ink: #1c2733;
+  --muted: #5b6b7c;
+  --line: #dfe4ea;
+  --accent: #0b62d6;
+  --accent-soft: #e8f1fd;
+  --core: #0b62d6;
+  --elective: #7a4dd6;
+  --warn: #b0641a;
+  --warn-soft: #fdf3e4;
+  --bad: #b3362c;
+  --bad-soft: #fbeae8;
+  --ok: #1c7a43;
+  --ok-soft: #e6f4ec;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 15px/1.65 -apple-system, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+}
+header.top {
+  background: var(--card);
+  border-bottom: 1px solid var(--line);
+  padding: 20px 16px 12px;
+}
+.wrap { max-width: 1180px; margin: 0 auto; padding: 0 16px; }
+h1 { font-size: 22px; margin: 0 0 4px; }
+.sub { color: var(--muted); font-size: 13px; margin: 0 0 10px; }
+nav.toc { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 14px; }
+nav.toc a { color: var(--accent); text-decoration: none; padding: 2px 0; }
+nav.toc a:hover { text-decoration: underline; }
+main.wrap { padding: 18px 16px 40px; }
+.strip { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 18px; }
+.stat {
+  background: var(--card); border: 1px solid var(--line); border-radius: 10px;
+  padding: 10px 14px; min-width: 120px; flex: 1;
+}
+.stat b { font-size: 20px; display: block; }
+.stat span { color: var(--muted); font-size: 12px; }
+section { margin-bottom: 34px; }
+h2 { font-size: 18px; margin: 0 0 4px; scroll-margin-top: 12px; }
+h2 .anchor-link { font-size: 13px; color: var(--muted); font-weight: normal; margin-left: 8px; }
+.secdesc { color: var(--muted); font-size: 13px; margin: 0 0 12px; }
+.card {
+  background: var(--card); border: 1px solid var(--line); border-radius: 10px;
+  padding: 14px 16px; margin-bottom: 14px;
+}
+.card h3 { margin: 0 0 6px; font-size: 16px; }
+.card .obj { color: var(--muted); font-size: 13px; margin: 0 0 8px; }
+.card ul { margin: 6px 0; padding-left: 18px; }
+.meta-list { font-size: 13px; color: var(--muted); margin: 0; padding-left: 18px; }
+.wraptable { overflow-x: auto; background: var(--card); border: 1px solid var(--line); border-radius: 10px; }
+table { border-collapse: collapse; width: 100%; font-size: 13.5px; }
+th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { background: #eef1f5; font-weight: 600; white-space: nowrap; position: sticky; top: 0; }
+tbody tr:last-child td { border-bottom: none; }
+a { color: var(--accent); }
+.badge {
+  display: inline-block; border-radius: 999px; padding: 1px 9px; font-size: 12px;
+  white-space: nowrap; margin: 1px 2px 1px 0; border: 1px solid transparent;
+}
+.core { background: var(--accent-soft); color: var(--core); }
+.elective { background: #f1ebfb; color: var(--elective); }
+.free { background: var(--ok-soft); color: var(--ok); }
+.mixed { background: var(--warn-soft); color: var(--warn); }
+.unknown-cost { background: var(--bad-soft); color: var(--bad); }
+.reviewA { background: var(--ok-soft); color: var(--ok); }
+.reviewB { background: var(--warn-soft); color: var(--warn); }
+.status-ok { background: var(--ok-soft); color: var(--ok); }
+.status-warn { background: var(--warn-soft); color: var(--warn); }
+.status-bad { background: var(--bad-soft); color: var(--bad); }
+.status-idle { background: #eef1f5; color: var(--muted); }
+ul.plain { margin: 4px 0; padding-left: 18px; }
+ul.plain li { margin: 2px 0; }
+.note { font-size: 12.5px; color: var(--muted); }
+#storage-note {
+  background: var(--warn-soft); color: var(--warn); border-radius: 8px;
+  padding: 8px 12px; margin: 0 0 14px; font-size: 13px;
+}
+.toolbar {
+  display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 14px;
+}
+.toolbar input[type="search"] {
+  flex: 1 1 220px; min-width: 150px; padding: 7px 10px;
+  border: 1px solid var(--line); border-radius: 8px; font: inherit; background: var(--card); color: var(--ink);
+}
+.toolbar select {
+  padding: 7px 8px; border: 1px solid var(--line); border-radius: 8px;
+  font: inherit; background: var(--card); color: var(--ink); max-width: 100%;
+}
+button, .filelabel { font: inherit; cursor: pointer; }
+button { color: var(--ink); }
+.pbtn {
+  border: 1px solid var(--line); border-radius: 999px; padding: 2px 10px;
+  background: var(--card); font-size: 12.5px; white-space: nowrap;
+}
+.st-idle { color: var(--muted); }
+.st-doing { background: var(--accent-soft); color: var(--core); border-color: transparent; }
+.st-done { background: var(--ok-soft); color: var(--ok); border-color: transparent; }
+.st-review { background: var(--warn-soft); color: var(--warn); border-color: transparent; }
+.btnrow { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0; align-items: center; }
+.btnrow button, .btnrow .filelabel {
+  border: 1px solid var(--line); background: var(--card); border-radius: 8px; padding: 6px 12px;
+}
+.filelabel { display: inline-block; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.empty-note {
+  padding: 14px; color: var(--muted); font-size: 14px;
+  background: var(--card); border: 1px dashed var(--line); border-radius: 10px;
+}
+code { background: #eef1f5; border-radius: 4px; padding: 1px 5px; }
+footer {
+  border-top: 1px solid var(--line); color: var(--muted);
+  font-size: 12.5px; padding: 16px; text-align: center; background: var(--card);
+}
+@media (max-width: 640px) {
+  body { font-size: 14px; }
+  .stat { min-width: 45%; }
+  th, td { padding: 7px 8px; }
+  h1 { font-size: 19px; }
+  .toolbar select { flex: 1 1 40%; }
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <h1>AI Agent 工程课程中心</h1>
+    <p class="sub" id="meta-line"></p>
+    <nav class="toc" id="toc"></nav>
+  </div>
+</header>
+<main class="wrap">
+  <div id="storage-note" class="note" hidden></div>
+  <div class="strip" id="stats"></div>
+  <div class="note" id="check-note" style="margin:-8px 0 20px;"></div>
+  <section id="progress"><h2>我的进度<span class="anchor-link">#progress</span></h2>
+    <p class="secdesc">进度只保存在本机浏览器,不参与生成与自动更新;导出/导入用于备份与跨浏览器迁移。「标为完成」是学习标记,不等于项目验收。</p>
+    <div class="card">
+      <p id="progress-summary" style="margin:0 0 8px;"></p>
+      <div class="btnrow">
+        <button id="btn-export" type="button">导出进度 JSON</button>
+        <label class="filelabel" for="file-import">导入进度 JSON<input type="file" id="file-import" accept=".json,application/json" hidden></label>
+        <button id="btn-clear" type="button">清空本机进度</button>
+      </div>
+      <p id="import-result" class="note" style="margin:4px 0 0;"></p>
+      <p class="note" style="margin:6px 0 0;">存储键:<code>learning-hub.progress.v1</code>(localStorage)。课程进度按作业 ID(如 S03-C08-01)、周进度按 W ID 记录,避免把某一章完成误当成整门课程完成。</p>
+    </div>
+  </section>
+  <section id="stages"><h2>学习阶段与指定内容<span class="anchor-link">#stages</span></h2>
+    <p class="secdesc">按能力依赖排列;每门资源只录入一次,在多个阶段复用时各阶段分别指定章节与交付物。可用下方搜索与筛选组合过滤。</p>
+    <div class="toolbar card" role="search">
+      <input id="f-search" type="search" placeholder="搜索课程、章节、说明…" aria-label="搜索课程与章节">
+      <select id="f-stage" aria-label="按阶段筛选"></select>
+      <select id="f-language" aria-label="按语言筛选"></select>
+      <select id="f-kind" aria-label="按类型筛选"></select>
+      <select id="f-priority" aria-label="按主修选修筛选"></select>
+      <button id="f-clear" type="button">清除筛选</button>
+      <span id="f-count" class="note"></span>
+    </div>
+    <div id="empty-stages" class="empty-note" hidden>没有符合当前筛选的阶段。</div>
+    <div id="stage-list"></div>
+  </section>
+  <section id="courses"><h2>全部资源(C01–C20)<span class="anchor-link">#courses</span></h2>
+    <p class="secdesc">核查标记 A=已读取官方页面;B=官方目录确认存在但详情页 403。免费阅读不等于模型 API、云服务、GPU 或证书免费。核查日期固定为 2026-10-28。</p>
+    <div class="wraptable"><table id="course-table"></table></div>
+    <div id="empty-courses" class="empty-note" hidden style="margin-top:10px;">没有符合当前筛选的资源;调整搜索词或清除筛选后重试。</div>
+    <p class="note" id="dl-note"></p>
+  </section>
+  <section id="weeks"><h2>18 周实践与交付<span class="anchor-link">#weeks</span></h2>
+    <p class="secdesc">完成一周需要交付可检查成果;点击每行「进度」按钮记录本机学习状态。</p>
+    <div class="wraptable"><table id="week-table"></table></div>
+  </section>
+  <section id="repos"><h2>仓库研读入口<span class="anchor-link">#repos</span></h2>
+    <p class="secdesc">与现有 FDE 产品代码连接的阅读入口;先在独立练习中实现,再判断是否适合产品。</p>
+    <div class="wraptable"><table id="repo-table"></table></div>
+  </section>
+  <section id="candidates"><h2>候选课程(未纳入学习路径)<span class="anchor-link">#candidates</span></h2>
+    <p class="secdesc">来自自动发现的官方目录候选,不直接加入主修;是否纳入由人工决定。</p>
+    <div id="candidate-list"></div>
+  </section>
+</main>
+<footer>
+  由 <code>python3 -m tools.learning_hub build</code> 从 <code>learning/data/catalog.json</code> 生成 ·
+  人工核查日期 2026-10-28 · 漂移检查:<code>build --check</code> ·
+  完整大纲见 <a href="../AI学习路径与大纲.md">AI学习路径与大纲.md</a>
+</footer>
+<script>
+window.LEARNING_HUB_DATA = __LEARNING_HUB_DATA__;
+/* PROGRESS-CORE-START */
+var LEARNING_HUB_PROGRESS = (function () {
+  "use strict";
+  var STATUSES = ["未开始", "进行中", "已完成", "待复盘"];
+  function validateImport(raw, knownAssignmentIds, knownWeekIds) {
+    if (raw === null || typeof raw !== "object" || Array.isArray(raw)) {
+      return { ok: false, error: "导入数据必须是 JSON 对象;导入已拒绝,本机进度未修改" };
+    }
+    if (raw.schema_version !== 1) {
+      return {
+        ok: false,
+        error: "schema_version 必须为 1,当前为 " + JSON.stringify(raw.schema_version) + ";导入已拒绝,本机进度未修改"
+      };
+    }
+    var sections = [["assignments", knownAssignmentIds], ["weeks", knownWeekIds]];
+    var cleaned = {};
+    var ignored = [];
+    for (var i = 0; i < sections.length; i++) {
+      var name = sections[i][0];
+      var known = sections[i][1];
+      var value = raw[name];
+      if (value === undefined || value === null) { cleaned[name] = {}; continue; }
+      if (typeof value !== "object" || Array.isArray(value)) {
+        return { ok: false, error: name + " 必须是对象;导入已拒绝,本机进度未修改" };
+      }
+      var out = {};
+      for (var id in value) {
+        if (!Object.prototype.hasOwnProperty.call(value, id)) { continue; }
+        if (known.indexOf(id) === -1) { ignored.push(id); continue; }
+        var status = value[id];
+        if (STATUSES.indexOf(status) === -1) {
+          return {
+            ok: false,
+            error: name + "." + id + " 含非法状态值 " + JSON.stringify(status) + ";导入已拒绝,本机进度未修改"
+          };
+        }
+        out[id] = status;
+      }
+      cleaned[name] = out;
+    }
+    var progress = { schema_version: 1, assignments: cleaned.assignments, weeks: cleaned.weeks };
+    for (var key in raw) {
+      if (!Object.prototype.hasOwnProperty.call(raw, key)) { continue; }
+      if (key === "schema_version" || key === "assignments" || key === "weeks") { continue; }
+      progress[key] = raw[key];
+    }
+    return { ok: true, progress: progress, ignored: ignored };
+  }
+  return { STATUSES: STATUSES, validateImport: validateImport };
+})();
+/* PROGRESS-CORE-END */
+(function () {
+  "use strict";
+  var D = window.LEARNING_HUB_DATA;
+  var catalog = D.catalog || {};
+  var obsByCourse = (D.observations && D.observations.courses) || {};
+  var candidateItems = (D.candidates && D.candidates.candidates) || [];
+  var courses = catalog.courses || [];
+  var stages = catalog.stages || [];
+  var weeks = catalog.weeks || [];
+  var repoLinks = catalog.repo_links || [];
+
+  var KIND = {
+    video_course: "视频课", text_course: "图文课", documentation: "文档教程",
+    article: "文章", source_code: "源码"
+  };
+  var COST = { free_content: "内容免费", mixed: "部分免费", unknown: "费用待核查" };
+  var COST_CLASS = { free_content: "free", mixed: "mixed", unknown: "unknown-cost" };
+  var PRIORITY = { core: "主修", elective: "选修" };
+  var PRIORITY_CLASS = { core: "core", elective: "elective" };
+  var OBS_STATUS = {
+    reachable: ["可达", "status-ok"], redirected: ["重定向", "status-ok"],
+    restricted: ["受限(403/登录)", "status-warn"], rate_limited: ["限流", "status-warn"],
+    missing_once: ["单次缺失", "status-warn"], likely_unavailable: ["疑似失效", "status-bad"],
+    network_error: ["网络错误", "status-warn"], unsupported_content: ["正文未定位", "status-warn"]
+  };
+  var STATUS_CLASS = {
+    "未开始": "st-idle", "进行中": "st-doing", "已完成": "st-done", "待复盘": "st-review"
+  };
+
+  function el(tag, attrs) {
+    var node = document.createElement(tag);
+    if (attrs) {
+      Object.keys(attrs).forEach(function (key) {
+        var value = attrs[key];
+        if (key === "text") { node.textContent = value; }
+        else if (key === "class") { node.className = value; }
+        else { node.setAttribute(key, value); }
+      });
+    }
+    for (var i = 2; i < arguments.length; i++) {
+      var child = arguments[i];
+      if (child === null || child === undefined) { continue; }
+      node.appendChild(typeof child === "string" ? document.createTextNode(child) : child);
+    }
+    return node;
+  }
+  function badge(text, cls) { return el("span", { class: "badge " + cls, text: text }); }
+  function courseLink(courseId) {
+    var course = coursesById[courseId];
+    if (!course) { return el("span", { text: courseId }); }
+    return el("a", { href: course.url, target: "_blank", rel: "noopener", text: courseId });
+  }
+  function progressButton(kind, id) {
+    return el("button", { class: "pbtn", type: "button", "data-kind": kind, "data-id": id, text: "未开始" });
+  }
+
+  var coursesById = {}, stagesById = {};
+  var allAssignmentIds = [], allWeekIds = [];
+  courses.forEach(function (c) { coursesById[c.id] = c; });
+  stages.forEach(function (s) {
+    stagesById[s.id] = s;
+    s.assignments.forEach(function (a) { allAssignmentIds.push(a.id); });
+  });
+  weeks.forEach(function (w) { allWeekIds.push(w.id); });
+
+  // 顶部导航与统计
+  var toc = document.getElementById("toc");
+  [["#progress", "我的进度"], ["#stages", "学习阶段"], ["#courses", "全部资源"],
+   ["#weeks", "18 周计划"], ["#repos", "研读入口"], ["#candidates", "候选课程"]].forEach(function (pair) {
+    toc.appendChild(el("a", { href: pair[0], text: pair[1] }));
+  });
+  document.getElementById("meta-line").textContent =
+    courses.length + " 门资源 · " + stages.length + " 个阶段 · " + weeks.length + " 周实践 · 数据由 catalog.json 生成,人工核查日期 2026-10-28";
+  var stats = document.getElementById("stats");
+  [[courses.length, "门资源"], [stages.length, "个阶段"], [weeks.length, "周实践"],
+   [allAssignmentIds.length, "个指定内容"], [candidateItems.length, "个候选(未纳入)"]].forEach(function (pair) {
+    stats.appendChild(el("div", { class: "stat" },
+      el("b", { text: String(pair[0]) }), el("span", { text: pair[1] })));
+  });
+
+  var observedCount = Object.keys(obsByCourse).length;
+  var checkNote = document.getElementById("check-note");
+  if (observedCount === 0) {
+    checkNote.textContent = "来源检查:尚未检查。自动检查结果会写入 learning/data/observations.json 后随页面重建展示;在检查之前,页面不编造任何检查日期或结论。";
+  } else {
+    checkNote.textContent = "来源检查:已覆盖 " + observedCount + " 门课程,最近运行 " +
+      (D.observations.last_run_at || "未知时间") + "(UTC)。403/429/超时表示访问受限或网络问题,不等同于课程下架。";
+  }
+
+  // 阶段与指定内容
+  var stageList = document.getElementById("stage-list");
+  stages.forEach(function (stage) {
+    var pre = stage.prerequisites && stage.prerequisites.length
+      ? "前置:" + stage.prerequisites.join(" → ") : "无前置";
+    var card = el("div", { class: "card", "data-stage": stage.id },
+      el("h3", { text: stage.id + " " + stage.title }),
+      el("p", { class: "obj", text: stage.objective + " · " + pre }),
+      el("ul", { class: "plain" },
+        el("li", null, el("b", { text: "阶段交付:" }), stage.deliverables.join(";")),
+        el("li", null, el("b", { text: "验收:" }), stage.acceptance.join(";")))
+    );
+    var tbody = el("tbody", null);
+    stage.assignments.forEach(function (assignment) {
+      var course = coursesById[assignment.course_id] || {};
+      var searchBlob = (
+        assignment.id + " " + assignment.course_id + " " + (course.title || "") + " " +
+        (course.provider || "") + " " + (course.language || "") + " " + (KIND[course.kind] || "") + " " +
+        assignment.sections.join(" ") + " " + assignment.why
+      ).toLowerCase();
+      tbody.appendChild(el("tr", null,
+        el("td", { text: assignment.id }),
+        el("td", null,
+          courseLink(assignment.course_id),
+          el("div", { class: "note", text: (course.title || "") + " · " + (course.language || "") + " · " + (KIND[course.kind] || course.kind || "") })),
+        el("td", null, badge(PRIORITY[assignment.priority] || assignment.priority, PRIORITY_CLASS[assignment.priority] || "")),
+        el("td", { text: assignment.sections.join("、") }),
+        el("td", { text: assignment.why }),
+        el("td", null, progressButton("assignments", assignment.id)))
+      );
+      var row = tbody.lastChild;
+      row.setAttribute("data-language", course.language || "");
+      row.setAttribute("data-kind", course.kind || "");
+      row.setAttribute("data-priority", assignment.priority);
+      row.setAttribute("data-search", searchBlob);
+    });
+    card.appendChild(el("div", { class: "wraptable" },
+      el("table", null,
+        el("thead", null, el("tr", null,
+          el("th", { text: "作业 ID" }), el("th", { text: "课程" }), el("th", { text: "优先级" }),
+          el("th", { text: "指定章节" }), el("th", { text: "为什么学" }), el("th", { text: "进度" }))),
+        tbody)));
+    card.appendChild(el("div", { class: "empty-note stage-empty", hidden: true,
+      text: "该筛选组合下本阶段没有匹配内容。" }));
+    stageList.appendChild(card);
+  });
+
+  // 资源表
+  var courseTable = document.getElementById("course-table");
+  courseTable.appendChild(el("thead", null, el("tr", null,
+    el("th", { text: "ID" }), el("th", { text: "课程 / 资源" }), el("th", { text: "提供方" }),
+    el("th", { text: "语言" }), el("th", { text: "形式" }), el("th", { text: "访问与费用" }),
+    el("th", { text: "建议投入" }), el("th", { text: "核查" }), el("th", { text: "最后检查" }))));
+  var courseBody = el("tbody", null);
+  courses.forEach(function (course) {
+    var effort = course.effort_hours;
+    var effortText = (effort.min === 0 && effort.max === 0)
+      ? "原目录未估算" : (effort.min === effort.max ? effort.min + "h" : effort.min + "–" + effort.max + "h");
+    if (effort.note) { effortText += ";" + effort.note; }
+    var review = course.manual_review;
+    var obs = obsByCourse[course.id];
+    var checkCell;
+    if (!obs) {
+      checkCell = el("span", { class: "badge status-idle", text: "尚未检查" });
+    } else {
+      var statusInfo = OBS_STATUS[obs.status] || [obs.status, "status-warn"];
+      checkCell = el("span", { class: "badge " + statusInfo[1],
+        text: statusInfo[0] + (obs.checked_at ? " · " + obs.checked_at.slice(0, 10) : "") });
+    }
+    var priorities = [];
+    var stageIds = [];
+    stages.forEach(function (stage) {
+      stage.assignments.forEach(function (assignment) {
+        if (assignment.course_id !== course.id) { return; }
+        stageIds.push(stage.id);
+        if (priorities.indexOf(assignment.priority) === -1) { priorities.push(assignment.priority); }
+      });
+    });
+    var searchBlob = (
+      course.id + " " + course.title + " " + course.provider + " " + course.language + " " +
+      (KIND[course.kind] || "") + " " + course.access_note + " " + course.cost_note + " " +
+      (course.note || "") + " " + priorities.join(" ")
+    ).toLowerCase();
+    var row = el("tr", null,
+      el("td", { text: course.id }),
+      el("td", null,
+        el("a", { href: course.url, target: "_blank", rel: "noopener", text: course.title }),
+        course.note ? el("div", { class: "note", text: course.note }) : null),
+      el("td", { text: course.provider }),
+      el("td", { text: course.language }),
+      el("td", { text: KIND[course.kind] || course.kind }),
+      el("td", null,
+        badge(COST[course.cost_status] || course.cost_status, COST_CLASS[course.cost_status] || "status-idle"),
+        el("div", { class: "note", text: course.access_note + ";费用:" + course.cost_note })),
+      el("td", { text: effortText }),
+      el("td", null, badge(review.level, "review" + review.level),
+        el("div", { class: "note", text: review.reviewed_on + (review.note ? ";" + review.note : "") })),
+      el("td", null, checkCell));
+    row.setAttribute("data-language", course.language);
+    row.setAttribute("data-kind", course.kind);
+    row.setAttribute("data-priorities", priorities.join(" "));
+    row.setAttribute("data-stages", stageIds.join(" "));
+    row.setAttribute("data-search", searchBlob);
+    courseBody.appendChild(row);
+  });
+  courseTable.appendChild(courseBody);
+  document.getElementById("dl-note").textContent =
+    "C12–C18 由 DeepLearning.AI 官方目录确认存在,详情页直接访问曾返回 403;费用未确认,不作为必修依赖,主线均有公开替代入口。";
+
+  // 周计划
+  var weekTable = document.getElementById("week-table");
+  weekTable.appendChild(el("thead", null, el("tr", null,
+    el("th", { text: "周" }), el("th", { text: "阶段" }), el("th", { text: "必修内容(作业 ID)" }),
+    el("th", { text: "实践 / 仓库关联" }), el("th", { text: "本周交付" }), el("th", { text: "验收" }),
+    el("th", { text: "进度" }))));
+  var weekBody = el("tbody", null);
+  weeks.forEach(function (week) {
+    var stage = stagesById[week.stage_id];
+    var assignmentsCell = el("div", null);
+    week.assignment_ids.forEach(function (assignmentId, index) {
+      if (index > 0) { assignmentsCell.appendChild(document.createTextNode(";")); }
+      var courseId = assignmentId.split("-")[1];
+      assignmentsCell.appendChild(courseLink(courseId));
+      assignmentsCell.appendChild(document.createTextNode(" " + assignmentId));
+    });
+    weekBody.appendChild(el("tr", null,
+      el("td", { text: week.id }),
+      el("td", { text: stage ? stage.id + " " + stage.title : week.stage_id }),
+      el("td", null, el("div", { text: week.study.join(";") }), assignmentsCell),
+      el("td", null,
+        el("div", { text: week.practice.join(";") }),
+        week.repo_paths.length ? el("div", { class: "note", text: "仓库:" + week.repo_paths.join(";") }) : null),
+      el("td", { text: week.deliverables.join(";") }),
+      el("td", { text: week.acceptance.join(";") }),
+      el("td", null, progressButton("weeks", week.id))));
+  });
+  weekTable.appendChild(weekBody);
+
+  // 研读入口
+  var repoTable = document.getElementById("repo-table");
+  repoTable.appendChild(el("thead", null, el("tr", null,
+    el("th", { text: "入口" }), el("th", { text: "路径" }), el("th", { text: "学习动作" }))));
+  var repoBody = el("tbody", null);
+  repoLinks.forEach(function (link) {
+    repoBody.appendChild(el("tr", null,
+      el("td", { text: link.label }),
+      el("td", null, el("a", { href: "../" + link.path, text: link.path })),
+      el("td", { text: link.description })));
+  });
+  repoTable.appendChild(repoBody);
+
+  // 候选课程
+  var candidateList = document.getElementById("candidate-list");
+  if (candidateItems.length === 0) {
+    candidateList.appendChild(el("div", { class: "card note",
+      text: "尚未运行候选发现,或暂无候选。发现结果只来自已配置的官方目录(Hugging Face Learn、LangChain Academy),不会自动写入学习路径;是否纳入由人工决定。" }));
+  } else {
+    var cTable = el("table", null,
+      el("thead", null, el("tr", null,
+        el("th", { text: "标题" }), el("th", { text: "来源" }), el("th", { text: "状态" }),
+        el("th", { text: "首次发现" }), el("th", { text: "最近发现" }), el("th", { text: "备注" }))),
+      el("tbody", null));
+    candidateItems.forEach(function (item) {
+      cTable.lastChild.appendChild(el("tr", null,
+        el("td", null, el("a", { href: item.url, target: "_blank", rel: "noopener", text: item.title || item.url })),
+        el("td", { text: item.source_id || "" }),
+        el("td", { text: item.status || "" }),
+        el("td", { text: (item.first_seen_at || "").slice(0, 10) }),
+        el("td", { text: (item.last_seen_at || "").slice(0, 10) }),
+        el("td", { text: item.note || "" })));
+    });
+    candidateList.appendChild(el("div", { class: "wraptable" }, cTable));
+  }
+
+  // ------------------------------------------------------------------
+  // 筛选与搜索
+  // ------------------------------------------------------------------
+  var filterState = { q: "", stage: "", language: "", kind: "", priority: "" };
+  var fSearch = document.getElementById("f-search");
+  var fStage = document.getElementById("f-stage");
+  var fLanguage = document.getElementById("f-language");
+  var fKind = document.getElementById("f-kind");
+  var fPriority = document.getElementById("f-priority");
+  var fCount = document.getElementById("f-count");
+
+  function fillSelect(select, options, label) {
+    select.appendChild(el("option", { value: "", text: label }));
+    options.forEach(function (pair) {
+      select.appendChild(el("option", { value: pair[0], text: pair[1] }));
+    });
+  }
+  var languageOptions = [];
+  var kindOptions = [];
+  courses.forEach(function (course) {
+    if (languageOptions.indexOf(course.language) === -1) { languageOptions.push(course.language); }
+    if (!kindOptions.some(function (pair) { return pair[0] === course.kind; })) {
+      kindOptions.push([course.kind, KIND[course.kind] || course.kind]);
+    }
+  });
+  fillSelect(fStage, stages.map(function (s) { return [s.id, s.id + " " + s.title]; }), "全部阶段");
+  fillSelect(fLanguage, languageOptions.map(function (l) { return [l, l]; }), "全部语言");
+  fillSelect(fKind, kindOptions, "全部类型");
+  fillSelect(fPriority, [["core", "主修"], ["elective", "选修"]], "主修+选修");
+
+  function rowMatches(row, checkStage) {
+    if (filterState.language && row.getAttribute("data-language") !== filterState.language) { return false; }
+    if (filterState.kind && row.getAttribute("data-kind") !== filterState.kind) { return false; }
+    if (filterState.priority) {
+      var single = row.getAttribute("data-priority");
+      var multi = row.getAttribute("data-priorities");
+      var hit = single ? single === filterState.priority
+        : (multi ? multi.split(" ").indexOf(filterState.priority) !== -1 : true);
+      if (!hit) { return false; }
+    }
+    if (checkStage && filterState.stage &&
+        (row.getAttribute("data-stages") || "").split(" ").indexOf(filterState.stage) === -1) { return false; }
+    if (filterState.q && (row.getAttribute("data-search") || "").indexOf(filterState.q) === -1) { return false; }
+    return true;
+  }
+
+  function applyFilters() {
+    var rowFiltersActive = Boolean(filterState.q || filterState.language || filterState.kind || filterState.priority);
+    var visibleCourses = 0;
+    var visibleRows = 0;
+    var visibleCards = 0;
+    courseBody.querySelectorAll("tr").forEach(function (row) {
+      var show = rowMatches(row, true);
+      row.hidden = !show;
+      if (show) { visibleCourses += 1; }
+    });
+    stageList.querySelectorAll(".card").forEach(function (card) {
+      if (filterState.stage && card.getAttribute("data-stage") !== filterState.stage) {
+        card.hidden = true;
+        return;
+      }
+      card.hidden = false;
+      var cardRows = 0;
+      card.querySelectorAll("tbody tr").forEach(function (row) {
+        row.hidden = !rowMatches(row, false);
+        if (!row.hidden) { cardRows += 1; visibleRows += 1; }
+      });
+      var empty = card.querySelector(".stage-empty");
+      if (empty) { empty.hidden = !(rowFiltersActive && cardRows === 0); }
+      visibleCards += 1;
+    });
+    document.getElementById("empty-courses").hidden = visibleCourses !== 0;
+    courseTable.parentElement.hidden = visibleCourses === 0;
+    document.getElementById("empty-stages").hidden = visibleCards !== 0;
+    fCount.textContent = "当前显示 " + visibleCourses + "/" + courses.length +
+      " 门资源 · " + visibleRows + "/" + allAssignmentIds.length + " 条指定内容";
+  }
+
+  fSearch.addEventListener("input", function () { filterState.q = fSearch.value.trim().toLowerCase(); applyFilters(); });
+  [fStage, fLanguage, fKind, fPriority].forEach(function (select) {
+    select.addEventListener("change", function () {
+      filterState.stage = fStage.value;
+      filterState.language = fLanguage.value;
+      filterState.kind = fKind.value;
+      filterState.priority = fPriority.value;
+      applyFilters();
+    });
+  });
+  document.getElementById("f-clear").addEventListener("click", function () {
+    fSearch.value = ""; fStage.value = ""; fLanguage.value = ""; fKind.value = ""; fPriority.value = "";
+    filterState = { q: "", stage: "", language: "", kind: "", priority: "" };
+    applyFilters();
+  });
+  applyFilters();
+
+  // ------------------------------------------------------------------
+  // 个人进度(localStorage;不可用时降级为临时进度)
+  // ------------------------------------------------------------------
+  var PROGRESS_KEY = "learning-hub.progress.v1";
+  var STATUSES = LEARNING_HUB_PROGRESS.STATUSES;
+  var storage = (function () {
+    try {
+      var t = window.localStorage;
+      t.setItem("__learning_hub_test__", "1");
+      t.removeItem("__learning_hub_test__");
+      return t;
+    } catch (e) { return null; }
+  })();
+  var storageNote = document.getElementById("storage-note");
+  function showStorageNote(text) { storageNote.textContent = text; storageNote.hidden = false; }
+  var importResult = document.getElementById("import-result");
+  function reportImport(result) {
+    if (result.ok) {
+      importResult.textContent = result.ignored.length
+        ? "导入成功(已替换本机进度);忽略未知 ID:" + result.ignored.join("、") + "。"
+        : "导入成功(已替换本机进度)。";
+    } else {
+      importResult.textContent = "导入失败:" + result.error;
+    }
+    return result;
+  }
+
+  function emptyProgress() { return { schema_version: 1, assignments: {}, weeks: {} }; }
+  var progress = (function () {
+    if (!storage) {
+      showStorageNote("当前环境无法本机保存(localStorage 不可用):进度仅保留在本次打开的页面中,关闭即丢失;可导出 JSON 备份。");
+      return emptyProgress();
+    }
+    var text;
+    try { text = storage.getItem(PROGRESS_KEY); } catch (e) { return emptyProgress(); }
+    if (!text) { return emptyProgress(); }
+    try {
+      var parsed = JSON.parse(text);
+      var check = LEARNING_HUB_PROGRESS.validateImport(parsed, allAssignmentIds, allWeekIds);
+      if (!check.ok) {
+        showStorageNote("本机进度数据不符合当前格式,已忽略(" + check.error + ");页面可正常阅读,可重新标记或导入备份。");
+        return emptyProgress();
+      }
+      return check.progress;
+    } catch (e) {
+      showStorageNote("本机进度 JSON 损坏,已忽略;页面可正常阅读,可重新标记或导入备份。");
+      return emptyProgress();
+    }
+  })();
+
+  function saveProgress() {
+    if (!storage) { return; }
+    try { storage.setItem(PROGRESS_KEY, JSON.stringify(progress)); }
+    catch (e) { showStorageNote("进度保存失败:进度仅在本次页面有效;请导出 JSON 备份。"); }
+  }
+  function statusOf(kind, id) {
+    return (progress[kind] && progress[kind][id]) || "未开始";
+  }
+  function paintButton(btn, status) {
+    btn.textContent = status;
+    btn.className = "pbtn " + (STATUS_CLASS[status] || "st-idle");
+  }
+  function refreshProgressUI() {
+    document.querySelectorAll(".pbtn").forEach(function (btn) {
+      paintButton(btn, statusOf(btn.getAttribute("data-kind"), btn.getAttribute("data-id")));
+    });
+    updateSummary();
+  }
+  function updateSummary() {
+    var lines = [];
+    [["assignments", allAssignmentIds.length, "作业"], ["weeks", allWeekIds.length, "周"]].forEach(function (item) {
+      var kind = item[0], total = item[1], label = item[2];
+      var done = 0, doing = 0, review = 0;
+      Object.keys(progress[kind] || {}).forEach(function (id) {
+        if (allAssignmentIds.indexOf(id) === -1 && allWeekIds.indexOf(id) === -1) { return; }
+        if (progress[kind][id] === "已完成") { done += 1; }
+        else if (progress[kind][id] === "进行中") { doing += 1; }
+        else if (progress[kind][id] === "待复盘") { review += 1; }
+      });
+      lines.push(label + ":已完成 " + done + "/" + total + "、进行中 " + doing + "、待复盘 " + review);
+    });
+    document.getElementById("progress-summary").textContent = lines.join(";") + "。";
+  }
+
+  document.addEventListener("click", function (ev) {
+    var btn = ev.target && ev.target.closest ? ev.target.closest(".pbtn") : null;
+    if (!btn) { return; }
+    var kind = btn.getAttribute("data-kind");
+    var id = btn.getAttribute("data-id");
+    var current = statusOf(kind, id);
+    var next = STATUSES[(STATUSES.indexOf(current) + 1) % STATUSES.length];
+    if (!progress[kind]) { progress[kind] = {}; }
+    progress[kind][id] = next;
+    saveProgress();
+    paintButton(btn, next);
+    updateSummary();
+  });
+
+  document.getElementById("btn-export").addEventListener("click", function () {
+    var text = window.LEARNING_HUB_EXPORT();
+    try {
+      var blob = new Blob([text], { type: "application/json" });
+      var url = URL.createObjectURL(blob);
+      var a = el("a", { href: url, download: "learning-hub-progress.json" });
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+      importResult.textContent = "已导出当前进度(JSON 下载);可重新导入恢复。";
+    } catch (e) {
+      importResult.textContent = "导出失败:" + e.message;
+    }
+  });
+  document.getElementById("file-import").addEventListener("change", function (ev) {
+    var file = ev.target.files && ev.target.files[0];
+    ev.target.value = "";
+    if (!file) { return; }
+    var reader = new FileReader();
+    reader.onload = function () { reportImport(window.LEARNING_HUB_APPLY_IMPORT(String(reader.result))); };
+    reader.onerror = function () { reportImport({ ok: false, error: "读取文件失败" }); };
+    reader.readAsText(file, "utf-8");
+  });
+  document.getElementById("btn-clear").addEventListener("click", function () {
+    progress = emptyProgress();
+    saveProgress();
+    refreshProgressUI();
+    importResult.textContent = "已清空本机进度。";
+  });
+
+  window.LEARNING_HUB_APPLY_IMPORT = function (text) {
+    var parsed;
+    try { parsed = JSON.parse(text); }
+    catch (e) { return { ok: false, error: "不是合法 JSON:" + e.message + ";本机进度未修改" }; }
+    var result = LEARNING_HUB_PROGRESS.validateImport(parsed, allAssignmentIds, allWeekIds);
+    if (!result.ok) { return result; }
+    progress = result.progress;
+    saveProgress();
+    refreshProgressUI();
+    return result;
+  };
+  window.LEARNING_HUB_EXPORT = function () {
+    return JSON.stringify(progress, null, 2);
+  };
+
+  refreshProgressUI();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+{
+  "candidates": [
+    {
+      "first_seen_at": "2026-10-28T17:00:30Z",
+      "last_seen_at": "2026-10-28T17:00:30Z",
+      "note": "",
+      "source_id": "langchain-academy",
+      "status": "new",
+      "title": "Introduction to Deep Agents Course Learn how to build long-running agents for complex workflows with Deep Agents, LangChain’s open-source agent harness. You’ll explore what an agent harness is, how it accelerates development, and how to use LangSmith to improve your agents.",
+      "url": "https://academy.langchain.com/courses/foundation-introduction-to-deepagents"
+    },
+    {
+      "first_seen_at": "2026-10-28T17:00:30Z",
+      "last_seen_at": "2026-10-28T17:00:30Z",
+      "note": "",
+      "source_id": "langchain-academy",
+      "status": "new",
+      "title": "Quickstart: LangSmith Essentials Course Learn the essentials of LangSmith — the comprehensive platform for agent engineering that helps teams use live production data for continuous testing and improvement.",
+      "url": "https://academy.langchain.com/courses/quickstart-langsmith-essentials"
+    },
+    {
+      "first_seen_at": "2026-10-28T17:00:30Z",
+      "last_seen_at": "2026-10-28T17:00:30Z",
+      "note": "",
+      "source_id": "langchain-academy",
+      "status": "new",
+      "title": "Introduction to LangSmith Deployment Course Learn to deploy, manage, and control your agents with LangSmith Deployment.",
+      "url": "https://academy.langchain.com/courses/langsmith-deployment"
+    }
+  ],
+  "last_discovery_month": null,
+  "schema_version": 1,
+  "source_checks": {
+    "hf-learn": {
+      "checked_at": "2026-10-28T17:00:30Z",
+      "last_success_month": null,
+      "note": "robots.txt 无法获取(network_error),本次跳过课程页检查",
+      "status": "failed"
+    },
+    "langchain-academy": {
+      "checked_at": "2026-10-28T17:00:30Z",
+      "last_success_month": "2026-10",
+      "note": "",
+      "status": "ok"
+    }
+  }
+}

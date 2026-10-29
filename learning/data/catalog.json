@@ -1,0 +1,913 @@
+{
+  "schema_version": 1,
+  "courses": [
+    {
+      "id": "C01",
+      "title": "CS50's Introduction to Programming with Python",
+      "provider": "Harvard",
+      "url": "https://cs50.harvard.edu/python/",
+      "language": "英文",
+      "kind": "video_course",
+      "access_note": "OCW 内容公开;提交作业需账号",
+      "cost_status": "mixed",
+      "cost_note": "OCW 内容公开;认证另看官方选项",
+      "effort_hours": { "min": 20, "max": 40, "note": "选学;零基础更长" },
+      "manual_review": { "level": "A", "reviewed_on": "2026-10-28", "note": "已读取官方课程页面" },
+      "note": "按基础选学"
+    },
+    {
+      "id": "C02",
+      "title": "FastAPI 教程:用户指南",
+      "provider": "FastAPI",
+      "url": "https://fastapi.tiangolo.com/zh/tutorial/",
+      "language": "中文",
+      "kind": "documentation",
+      "access_note": "免费公开",
+      "cost_status": "free_content",
+      "cost_note": "免费公开",
+      "effort_hours": { "min": 8, "max": 12, "note": "" },
+      "manual_review": { "level": "A", "reviewed_on": "2026-10-28", "note": "已读取官方文档页面" },
+      "note": "流式传输按当前目录学习"
+    },
+    {
+      "id": "C03",
+      "title": "Get started with Docker",
+      "provider": "Docker",
+      "url": "https://docs.docker.com/get-started/",
+      "language": "英文",
+      "kind": "documentation",
+      "access_note": "教程公开;软件和托管服务需按对应许可获取",
+      "cost_status": "mixed",
+      "cost_note": "教程公开;软件和托管服务按对应许可/套餐",
+      "effort_hours": { "min": 6, "max": 10, "note": "" },
+      "manual_review": { "level": "A", "reviewed_on": "2026-10-28", "note": "已读取官方教程页面" },
+      "note": "部署练习中增加健康检查与环境配置"
+    },
+    {
+      "id": "C04",
+      "title": "LLM Universe:大模型应用开发",
+      "provider": "Datawhale",
+      "url": "https://github.com/datawhalechina/llm-universe",
+      "language": "中文",
+      "kind": "text_course",
+      "access_note": "仓库公开",
+      "cost_status": "mixed",
+      "cost_note": "公开;模型调用可能收费",
+      "effort_hours": { "min": 12, "max": 20, "note": "选学" },
+      "manual_review": { "level": "A", "reviewed_on": "2026-10-28", "note": "已读取仓库页面" },
+      "note": "以仓库当前目录为准"
+    },
+    {
+      "id": "C05",
+      "title": "Hello-Agents:从零开始构建智能体",
+      "provider": "Datawhale",
+      "url": "https://github.com/datawhalechina/hello-agents",
+      "language": "中文",
+      "kind": "text_course",
+      "access_note": "仓库公开;部分内容有配套视频",
+      "cost_status": "mixed",
+      "cost_note": "公开;外部模型和服务另计",
+      "effort_hours": { "min": 25, "max": 40, "note": "选学" },
+      "manual_review": { "level": "A", "reviewed_on": "2026-10-28", "note": "已读取仓库页面" },
+      "note": "第 3/4/7/8/9/10/12/14/16 章分阶段选读;暂跳 Agentic-RL"
+    },
+    {
+      "id": "C06",
+      "title": "Hugging Face AI Agents Course",
+      "provider": "Hugging Face",
+      "url": "https://huggingface.co/learn/agents-course/en/unit0/introduction",
+      "language": "英文",
+      "kind": "text_course",
+      "access_note": "部分实践/提交需账号",
+      "cost_status": "mixed",
+      "cost_note": "免费课程;推理资源另计",
+      "effort_hours": { "min": 8, "max": 15, "note": "选学" },
+      "manual_review": { "level": "A", "reviewed_on": "2026-10-28", "note": "已读取官方课程页面" },
+      "note": "Unit 3 Agentic RAG 与观测评测加餐对应阶段 4/5;原 README 分阶段表仅单列阶段 3 内容"
+    },
+    {
+      "id": "C07",
+      "title": "Hugging Face MCP Course",
+      "provider": "Hugging Face × Anthropic",
+      "url": "https://huggingface.co/learn/mcp-course/en/unit0/introduction",
+      "language": "英文",
+      "kind": "text_course",
+      "access_note": "发布应用需账号",
+      "cost_status": "mixed",
+      "cost_note": "免费课程;资源另计",
+      "effort_hours": { "min": 8, "max": 12, "note": "" },
+      "manual_review": { "level": "A", "reviewed_on": "2026-10-28", "note": "已读取官方课程页面" },
+      "note": "高级工作流选学"
+    },
+    {
+      "id": "C08",
+      "title": "Introduction to LangGraph — Python",
+      "provider": "LangChain Academy",
+      "url": "https://academy.langchain.com/courses/intro-to-langgraph",
+      "language": "英文",
+      "kind": "video_course",
+      "access_note": "注册学习",
+      "cost_status": "mixed",
+      "cost_note": "页面标明免费;模型与托管服务另计",
+      "effort_hours": { "min": 15, "max": 25, "note": "官方视频 6h" },
+      "manual_review": { "level": "A", "reviewed_on": "2026-10-28", "note": "已读取官方课程页面" },
+      "note": "模块 1–6 覆盖阶段 3–6"
+    },
+    {
+      "id": "C09",
+      "title": "Effective context engineering for AI agents",
+      "provider": "Anthropic",
+      "url": "https://www.anthropic.com/research/effective-context-engineering-for-ai-agents",
+      "language": "英文",
+      "kind": "article",
+      "access_note": "公开",
+      "cost_status": "free_content",
+      "cost_note": "公开",
+      "effort_hours": { "min": 2, "max": 3, "note": "" },
+      "manual_review": { "level": "A", "reviewed_on": "2026-10-28", "note": "已读取文章页面" },
+      "note": "工程文章,非课程;转为自己的上下文设计检查表"
+    },
+    {
+      "id": "C10",
+      "title": "Promptfoo Intro",
+      "provider": "Promptfoo",
+      "url": "https://www.promptfoo.dev/docs/intro/",
+      "language": "英文",
+      "kind": "documentation",
+      "access_note": "文档公开;本仓库已有 CLI 用法",
+      "cost_status": "mixed",
+      "cost_note": "文档公开;模型/云功能另计",
+      "effort_hours": { "min": 5, "max": 8, "note": "" },
+      "manual_review": { "level": "A", "reviewed_on": "2026-10-28", "note": "已读取官方文档" },
+      "note": "先读仓库 evals/README.md 再运行"
+    },
+    {
+      "id": "C11",
+      "title": "Full Stack LLM Bootcamp — Spring 2023",
+      "provider": "Full Stack Deep Learning",
+      "url": "https://fullstackdeeplearning.com/llm-bootcamp/spring-2023/",
+      "language": "英文",
+      "kind": "video_course",
+      "access_note": "官网公开访问",
+      "cost_status": "free_content",
+      "cost_note": "官网标明免费",
+      "effort_hours": { "min": 6, "max": 10, "note": "选学" },
+      "manual_review": {
+        "level": "A",
+        "reviewed_on": "2026-10-28",
+        "note": "2023 年材料,工程原则有参考价值,API 和工具示例需核对"
+      },
+      "note": "历史课程"
+    },
+    {
+      "id": "C12",
+      "title": "ChatGPT Prompt Engineering for Developers",
+      "provider": "DeepLearning.AI × OpenAI",
+      "url": "https://www.deeplearning.ai/courses/chatgpt-prompt-eng",
+      "language": "英文",
+      "kind": "video_course",
+      "access_note": "注册学习;详情页未直接核查",
+      "cost_status": "unknown",
+      "cost_note": "官方摘要出现限时免费说明,当前权益需在课堂确认",
+      "effort_hours": { "min": 2, "max": 4, "note": "" },
+      "manual_review": {
+        "level": "B",
+        "reviewed_on": "2026-10-28",
+        "note": "官方目录确认存在,详情页抓取返回 403;实际模型调用沿用项目当前适配层"
+      },
+      "note": ""
+    },
+    {
+      "id": "C13",
+      "title": "Functions, Tools and Agents with LangChain",
+      "provider": "DeepLearning.AI × LangChain",
+      "url": "https://www.deeplearning.ai/courses/functions-tools-agents-langchain",
+      "language": "英文",
+      "kind": "video_course",
+      "access_note": "注册学习;详情页未直接核查",
+      "cost_status": "unknown",
+      "cost_note": "免费范围/PRO 作业以登录后页面为准",
+      "effort_hours": { "min": 3, "max": 5, "note": "" },
+      "manual_review": {
+        "level": "B",
+        "reviewed_on": "2026-10-28",
+        "note": "官方目录确认存在,详情页抓取返回 403;早期 LCEL/API 示例只用于概念对照"
+      },
+      "note": ""
+    },
+    {
+      "id": "C14",
+      "title": "Advanced Retrieval for AI with Chroma",
+      "provider": "DeepLearning.AI × Chroma",
+      "url": "https://www.deeplearning.ai/courses/advanced-retrieval-for-ai",
+      "language": "英文",
+      "kind": "video_course",
+      "access_note": "注册学习;详情页未直接核查",
+      "cost_status": "unknown",
+      "cost_note": "费用待确认",
+      "effort_hours": { "min": 3, "max": 5, "note": "" },
+      "manual_review": {
+        "level": "B",
+        "reviewed_on": "2026-10-28",
+        "note": "官方目录确认存在,详情页抓取返回 403;另补 BM25 与权限过滤练习"
+      },
+      "note": ""
+    },
+    {
+      "id": "C15",
+      "title": "Long-Term Agentic Memory With LangGraph",
+      "provider": "DeepLearning.AI × LangChain",
+      "url": "https://www.deeplearning.ai/courses/long-term-agentic-memory-with-langgraph",
+      "language": "英文",
+      "kind": "video_course",
+      "access_note": "注册学习;详情页未直接核查",
+      "cost_status": "unknown",
+      "cost_note": "费用待确认",
+      "effort_hours": { "min": 3, "max": 5, "note": "" },
+      "manual_review": {
+        "level": "B",
+        "reviewed_on": "2026-10-28",
+        "note": "官方目录确认存在,详情页抓取返回 403;与 C08 模块 5 内容重叠时选一门"
+      },
+      "note": ""
+    },
+    {
+      "id": "C16",
+      "title": "Evaluating AI Agents",
+      "provider": "DeepLearning.AI × Arize AI",
+      "url": "https://www.deeplearning.ai/courses/evaluating-ai-agents",
+      "language": "英文",
+      "kind": "video_course",
+      "access_note": "注册学习;详情页未直接核查",
+      "cost_status": "unknown",
+      "cost_note": "费用待确认",
+      "effort_hours": { "min": 4, "max": 6, "note": "" },
+      "manual_review": {
+        "level": "B",
+        "reviewed_on": "2026-10-28",
+        "note": "官方目录确认存在,详情页抓取返回 403;实践迁移到本仓库固定任务集"
+      },
+      "note": ""
+    },
+    {
+      "id": "C17",
+      "title": "Agent Skills with Anthropic",
+      "provider": "DeepLearning.AI × Anthropic",
+      "url": "https://www.deeplearning.ai/courses/agent-skills-with-anthropic",
+      "language": "英文",
+      "kind": "video_course",
+      "access_note": "注册学习;详情页未直接核查",
+      "cost_status": "unknown",
+      "cost_note": "费用待确认",
+      "effort_hours": { "min": 4, "max": 6, "note": "" },
+      "manual_review": {
+        "level": "B",
+        "reviewed_on": "2026-10-28",
+        "note": "官方目录确认存在,详情页抓取返回 403;写一份可评测的 Skill"
+      },
+      "note": ""
+    },
+    {
+      "id": "C18",
+      "title": "Automated Testing for LLMOps",
+      "provider": "DeepLearning.AI × CircleCI",
+      "url": "https://www.deeplearning.ai/courses/automated-testing-llmops",
+      "language": "英文",
+      "kind": "video_course",
+      "access_note": "注册学习;详情页未直接核查",
+      "cost_status": "unknown",
+      "cost_note": "费用待确认",
+      "effort_hours": { "min": 3, "max": 5, "note": "" },
+      "manual_review": {
+        "level": "B",
+        "reviewed_on": "2026-10-28",
+        "note": "官方目录确认存在,详情页抓取返回 403;原目录标注适用阶段 5/6"
+      },
+      "note": ""
+    },
+    {
+      "id": "C19",
+      "title": "vLLM Quickstart",
+      "provider": "vLLM",
+      "url": "https://docs.vllm.ai/en/latest/getting_started/quickstart/",
+      "language": "英文",
+      "kind": "documentation",
+      "access_note": "官方文档公开",
+      "cost_status": "mixed",
+      "cost_note": "文档免费;算力另计",
+      "effort_hours": { "min": 0, "max": 0, "note": "原目录未给出估算;需要私有化部署时开展" },
+      "manual_review": { "level": "A", "reviewed_on": "2026-10-28", "note": "已读取官方文档" },
+      "note": "官方文档,非视频课;阶段 6 选学,需要私有化部署时开展,再读性能指标"
+    },
+    {
+      "id": "C20",
+      "title": "DeerFlow 官方仓库",
+      "provider": "ByteDance",
+      "url": "https://github.com/bytedance/deer-flow",
+      "language": "英文为主",
+      "kind": "source_code",
+      "access_note": "仓库公开",
+      "cost_status": "mixed",
+      "cost_note": "公开;模型与运行资源另计",
+      "effort_hours": { "min": 0, "max": 0, "note": "原目录未给出估算;按所选综合项目场景开展" },
+      "manual_review": { "level": "A", "reviewed_on": "2026-10-28", "note": "已读取仓库页面" },
+      "note": "源码与文档,非课程;研读时记录实际 commit"
+    }
+  ],
+  "stages": [
+    {
+      "id": "S00",
+      "title": "工程基础",
+      "objective": "能否独立开发与测试服务?",
+      "prerequisites": [],
+      "deliverables": ["一个带测试的 API 服务"],
+      "acceptance": [
+        "带校验和测试的 API",
+        "能从干净环境启动服务,运行测试,并根据日志定位一个请求失败原因"
+      ],
+      "assignments": [
+        {
+          "id": "S00-C01-01",
+          "course_id": "C01",
+          "priority": "core",
+          "sections": ["函数", "异常", "单元测试", "文件", "面向对象"],
+          "why": "Python 基础补齐;courses.md 阶段 0 指定内容,按基础选学"
+        },
+        {
+          "id": "S00-C02-01",
+          "course_id": "C02",
+          "priority": "core",
+          "sections": ["请求体", "响应模型", "错误处理", "依赖", "安全", "测试"],
+          "why": "API 开发与校验基础,阶段 0 主修"
+        },
+        {
+          "id": "S00-C03-01",
+          "course_id": "C03",
+          "priority": "elective",
+          "sections": ["容器", "镜像", "应用栈"],
+          "why": "容器入门,阶段 0 选修"
+        }
+      ]
+    },
+    {
+      "id": "S01",
+      "title": "模型调用",
+      "objective": "如何稳定调用模型?",
+      "prerequisites": ["S00"],
+      "deliverables": ["LLM Gateway"],
+      "acceptance": [
+        "模型适配、结构校验、错误分类",
+        "既能处理成功响应,也能演示超时、非法输出与取消请求;每次调用可追踪模型、耗时和用量;结构合规与内容正确分别验证"
+      ],
+      "assignments": [
+        {
+          "id": "S01-C04-01",
+          "course_id": "C04",
+          "priority": "core",
+          "sections": ["模型 API 入门", "Prompt 内容"],
+          "why": "中文主线:模型 API 与应用入门,阶段 1 主修"
+        },
+        {
+          "id": "S01-C05-01",
+          "course_id": "C05",
+          "priority": "core",
+          "sections": ["第 3 章"],
+          "why": "阶段 1 主修指定章节"
+        },
+        {
+          "id": "S01-C02-01",
+          "course_id": "C02",
+          "priority": "elective",
+          "sections": ["流式传输"],
+          "why": "流式响应实验,按当前目录学习;阶段 1 选修"
+        },
+        {
+          "id": "S01-C12-01",
+          "course_id": "C12",
+          "priority": "elective",
+          "sections": ["指令、示例、迭代和文本处理"],
+          "why": "Prompt 专项短课,阶段 1 选修;实际模型调用沿用项目当前适配层"
+        }
+      ]
+    },
+    {
+      "id": "S02",
+      "title": "工具接入",
+      "objective": "如何可靠执行工具调用?",
+      "prerequisites": ["S01"],
+      "deliverables": ["Tool Runtime"],
+      "acceptance": [
+        "工具注册、校验、拒绝与审计",
+        "非法参数在执行前被拒绝;越权调用留下记录;失败有明确错误;能从 Trace 中还原一次工具调用"
+      ],
+      "assignments": [
+        {
+          "id": "S02-C07-01",
+          "course_id": "C07",
+          "priority": "core",
+          "sections": ["架构", "Client/Server", "工具/资源/提示模板", "端到端应用"],
+          "why": "协议主线:MCP 基础与端到端应用,阶段 2 主修;高级工作流选学"
+        },
+        {
+          "id": "S02-C05-01",
+          "course_id": "C05",
+          "priority": "core",
+          "sections": ["第 10 章 MCP 部分"],
+          "why": "阶段 2 主修指定章节"
+        },
+        {
+          "id": "S02-C13-01",
+          "course_id": "C13",
+          "priority": "elective",
+          "sections": ["结构输出", "工具选择和路由"],
+          "why": "Function Calling 专项短课,阶段 2 选修;早期 LCEL/API 示例只用于概念对照"
+        }
+      ]
+    },
+    {
+      "id": "S03",
+      "title": "Agent 执行",
+      "objective": "如何完成并恢复多步任务?",
+      "prerequisites": ["S02"],
+      "deliverables": ["Codebase Agent v1"],
+      "acceptance": [
+        "有终止条件和恢复能力的 Agent",
+        "任务有明确终态;重复失败不会无限循环;变更能通过 diff 检查;测试结果和失败原因均可追踪"
+      ],
+      "assignments": [
+        {
+          "id": "S03-C08-01",
+          "course_id": "C08",
+          "priority": "core",
+          "sections": ["模块 1 图与 Agent", "模块 2 状态", "模块 3 人机协同"],
+          "why": "框架主线:LangGraph 模块 1–3,阶段 3 主修"
+        },
+        {
+          "id": "S03-C05-01",
+          "course_id": "C05",
+          "priority": "core",
+          "sections": ["第 4 章", "第 7 章"],
+          "why": "阶段 3 主修选读章节"
+        },
+        {
+          "id": "S03-C06-01",
+          "course_id": "C06",
+          "priority": "elective",
+          "sections": ["Unit 1", "Unit 2.3 LangGraph"],
+          "why": "可替代部分基础阅读,阶段 3 选修"
+        }
+      ]
+    },
+    {
+      "id": "S04",
+      "title": "上下文与知识",
+      "objective": "如何提供准确且足够的上下文?",
+      "prerequisites": ["S03"],
+      "deliverables": ["Codebase Agent v2"],
+      "acceptance": [
+        "检索、引用、记忆与上下文预算",
+        "使用固定问题集比较关键词检索、向量检索与混合检索;检查引用是否支持结论;上下文压缩后仍能保留目标、约束和未完成事项"
+      ],
+      "assignments": [
+        {
+          "id": "S04-C05-01",
+          "course_id": "C05",
+          "priority": "core",
+          "sections": ["第 8 章", "第 9 章"],
+          "why": "阶段 4 主修指定章节"
+        },
+        {
+          "id": "S04-C04-01",
+          "course_id": "C04",
+          "priority": "core",
+          "sections": ["知识库与 RAG 应用"],
+          "why": "阶段 4 主修:知识库/RAG 内容"
+        },
+        {
+          "id": "S04-C08-01",
+          "course_id": "C08",
+          "priority": "core",
+          "sections": ["模块 5 记忆"],
+          "why": "阶段 4 主修:长期记忆"
+        },
+        {
+          "id": "S04-C09-01",
+          "course_id": "C09",
+          "priority": "elective",
+          "sections": ["上下文取舍、检索、压缩与长任务"],
+          "why": "上下文工程文章,阶段 4 选修;转为自己的上下文设计检查表"
+        },
+        {
+          "id": "S04-C14-01",
+          "course_id": "C14",
+          "priority": "elective",
+          "sections": ["检索质量诊断、查询与召回优化"],
+          "why": "检索专项短课,阶段 4 选修;另补 BM25 与权限过滤练习"
+        },
+        {
+          "id": "S04-C15-01",
+          "course_id": "C15",
+          "priority": "elective",
+          "sections": ["长期记忆与 LangMem"],
+          "why": "记忆专项短课,阶段 4 选修;与 C08 模块 5 内容重叠时选一门"
+        },
+        {
+          "id": "S04-C06-01",
+          "course_id": "C06",
+          "priority": "elective",
+          "sections": ["Unit 3 Agentic RAG"],
+          "why": "原目录把 C06 标注到阶段 3/4/5,本节对应 RAG 主题,按需选读"
+        }
+      ]
+    },
+    {
+      "id": "S05",
+      "title": "协作与评测",
+      "objective": "如何复用能力并证明效果提升?",
+      "prerequisites": ["S04"],
+      "deliverables": ["评测与协作平台"],
+      "acceptance": [
+        "版本比较、失败分析、受控协作",
+        "在相同任务集和可比条件下输出版本对比;记录失败样本;抽查自动评分与人工判断的一致性;未观察到提升时保留结论"
+      ],
+      "assignments": [
+        {
+          "id": "S05-C05-01",
+          "course_id": "C05",
+          "priority": "core",
+          "sections": ["第 12 章"],
+          "why": "阶段 5 主修指定章节"
+        },
+        {
+          "id": "S05-C08-01",
+          "course_id": "C08",
+          "priority": "core",
+          "sections": ["模块 4 协作"],
+          "why": "阶段 5 主修:多 Agent 并行与结果汇总"
+        },
+        {
+          "id": "S05-C10-01",
+          "course_id": "C10",
+          "priority": "core",
+          "sections": ["配置", "断言", "Provider", "结果对比"],
+          "why": "评测教程,阶段 5 主修;先读仓库 evals/README.md 再运行"
+        },
+        {
+          "id": "S05-C16-01",
+          "course_id": "C16",
+          "priority": "elective",
+          "sections": ["系统化评测与迭代"],
+          "why": "评测专项短课,阶段 5 选修;实践迁移到本仓库固定任务集"
+        },
+        {
+          "id": "S05-C17-01",
+          "course_id": "C17",
+          "priority": "elective",
+          "sections": ["按需加载的技能"],
+          "why": "Skill 专项短课,阶段 5 选修;写一份可评测的 Skill"
+        },
+        {
+          "id": "S05-C18-01",
+          "course_id": "C18",
+          "priority": "elective",
+          "sections": ["把 LLM 评测接入变更检查和 CI"],
+          "why": "持续测试专项短课,阶段 5 选修;原目录标注适用阶段 5/6"
+        }
+      ]
+    },
+    {
+      "id": "S06",
+      "title": "生产工程",
+      "objective": "如何部署、监控、回滚?",
+      "prerequisites": ["S05"],
+      "deliverables": ["可运行的交付版本"],
+      "acceptance": [
+        "可部署、可诊断、可回退的版本",
+        "在新环境启动;模拟一次外部工具故障并定位;切换和回滚一个配置版本;统计单任务成本;保存一次故障演练记录"
+      ],
+      "assignments": [
+        {
+          "id": "S06-C03-01",
+          "course_id": "C03",
+          "priority": "core",
+          "sections": ["镜像", "应用栈", "健康检查与环境配置"],
+          "why": "阶段 6 主修;部署练习中增加健康检查与环境配置"
+        },
+        {
+          "id": "S06-C08-01",
+          "course_id": "C08",
+          "priority": "core",
+          "sections": ["模块 6 部署"],
+          "why": "阶段 6 主修:LangGraph 部署"
+        },
+        {
+          "id": "S06-C11-01",
+          "course_id": "C11",
+          "priority": "core",
+          "sections": ["LLMOps"],
+          "why": "阶段 6 主修;2023 年材料,工程原则有参考价值,API 和工具示例需核对"
+        },
+        {
+          "id": "S06-C19-01",
+          "course_id": "C19",
+          "priority": "elective",
+          "sections": ["环境要求", "批量推理和在线服务", "性能指标"],
+          "why": "自托管推理,阶段 6 选学;需要私有化部署时开展"
+        }
+      ]
+    },
+    {
+      "id": "S07",
+      "title": "综合交付",
+      "objective": "如何解决真实业务问题?",
+      "prerequisites": ["S06"],
+      "deliverables": ["综合项目与交付报告"],
+      "acceptance": [
+        "可演示、可评测的综合项目",
+        "需求与场景边界、架构图、可运行项目、演示任务、评测报告、失败案例、成本记录和部署手册"
+      ],
+      "assignments": [
+        {
+          "id": "S07-C05-01",
+          "course_id": "C05",
+          "priority": "core",
+          "sections": ["第 14 章", "第 16 章"],
+          "why": "阶段 7 主修指定章节"
+        },
+        {
+          "id": "S07-C20-01",
+          "course_id": "C20",
+          "priority": "core",
+          "sections": [
+            "README 与架构",
+            "入口、工具、上下文、沙箱、子代理、Skill 与持久化"
+          ],
+          "why": "源码研读,阶段 7 主修;记录实际 commit"
+        },
+        {
+          "id": "S07-C11-01",
+          "course_id": "C11",
+          "priority": "elective",
+          "sections": ["UX for Language User Interfaces", "askFSDL 项目讲解"],
+          "why": "阶段 7 选修"
+        }
+      ]
+    }
+  ],
+  "weeks": [
+    {
+      "id": "W01",
+      "stage_id": "S01",
+      "assignment_ids": ["S01-C04-01", "S01-C05-01"],
+      "study": ["C04 API 入门", "C05 第 3 章选读"],
+      "practice": ["阅读 models.py 与模型配置", "梳理调用、错误、用量链路"],
+      "deliverables": ["调用流程图", "建立 5 个固定任务及预期结果"],
+      "acceptance": ["需要 API 时由本地环境提供密钥"],
+      "repo_paths": ["platform/fde_product/models.py", "docs/model-configuration.md"]
+    },
+    {
+      "id": "W02",
+      "stage_id": "S01",
+      "assignment_ids": ["S01-C02-01", "S01-C04-01"],
+      "study": ["C02 请求/响应校验", "C04 Prompt 内容"],
+      "practice": [
+        "在独立练习中实现需求信息提取、Schema 校验和错误分类",
+        "补流式响应实验"
+      ],
+      "deliverables": ["正常输出、非法输出、超时、取消的记录"],
+      "acceptance": ["区分格式正确与事实正确"],
+      "repo_paths": []
+    },
+    {
+      "id": "W03",
+      "stage_id": "S02",
+      "assignment_ids": ["S02-C05-01"],
+      "study": ["C05 第 7 章工具相关内容"],
+      "practice": ["阅读 business.py/actions.py", "独立实现工具注册与参数模型"],
+      "deliverables": ["工具清单、输入/输出/错误 Schema"],
+      "acceptance": ["非法参数在执行前被拒绝"],
+      "repo_paths": ["platform/fde_product/business.py", "platform/fde_product/actions.py"]
+    },
+    {
+      "id": "W04",
+      "stage_id": "S02",
+      "assignment_ids": ["S02-C07-01", "S02-C05-01"],
+      "study": ["C07 Unit 1–2", "C05 第 10 章 MCP 部分"],
+      "practice": ["独立 MCP Client/Server 练习,接入一个只读工具"],
+      "deliverables": ["演示工具发现、调用、错误回传", "附权限与审计设计"],
+      "acceptance": ["不据此宣称产品已有 MCP"],
+      "repo_paths": []
+    },
+    {
+      "id": "W05",
+      "stage_id": "S03",
+      "assignment_ids": ["S03-C05-01", "S03-C08-01"],
+      "study": ["C05 第 4 章", "C08 模块 1"],
+      "practice": ["用少量工具实现最小 Agent Loop", "阅读 agent.py 作对照"],
+      "deliverables": ["代码理解任务"],
+      "acceptance": ["设置迭代次数和成本预算", "能正常结束和失败结束"],
+      "repo_paths": ["platform/fde_product/agent.py"]
+    },
+    {
+      "id": "W06",
+      "stage_id": "S03",
+      "assignment_ids": ["S03-C08-01"],
+      "study": ["C08 模块 2–3 的状态与断点"],
+      "practice": ["阅读 agent.py/interaction.py", "在独立练习保存 Checkpoint"],
+      "deliverables": ["状态图与中断恢复演示"],
+      "acceptance": ["明确重复执行如何避免副作用"],
+      "repo_paths": ["platform/fde_product/agent.py", "platform/fde_product/interaction.py"]
+    },
+    {
+      "id": "W07",
+      "stage_id": "S03",
+      "assignment_ids": ["S03-C08-01", "S00-C03-01"],
+      "study": ["C08 模块 3 人机协同", "C03 容器基础"],
+      "practice": ["独立 Codebase Agent 增加文件变更和测试", "限制目录与命令"],
+      "deliverables": ["生成变更 diff 与测试记录"],
+      "acceptance": ["演示取消、拒绝、失败和恢复路径"],
+      "repo_paths": []
+    },
+    {
+      "id": "W08",
+      "stage_id": "S04",
+      "assignment_ids": ["S04-C04-01", "S04-C05-01"],
+      "study": ["C04 知识库/RAG", "C05 第 8 章"],
+      "practice": ["使用公开代码和脱敏文档建索引", "先做关键词与向量检索"],
+      "deliverables": ["10 个检索问题、相关证据标注、两种检索基线"],
+      "acceptance": ["不使用客户数据推导事实"],
+      "repo_paths": []
+    },
+    {
+      "id": "W09",
+      "stage_id": "S04",
+      "assignment_ids": ["S04-C05-01", "S04-C09-01"],
+      "study": ["C05 第 9 章", "C09 工程文章"],
+      "practice": ["增加混合检索、引用和上下文预算", "必要时选 C14"],
+      "deliverables": ["比较固定问题上的召回与引用质量", "输出 Context Debug Report"],
+      "acceptance": ["对齐阶段目标:检索、引用、记忆与上下文预算"],
+      "repo_paths": []
+    },
+    {
+      "id": "W10",
+      "stage_id": "S04",
+      "assignment_ids": ["S04-C08-01", "S04-C05-01"],
+      "study": ["C08 模块 5", "C05 第 8 章记忆"],
+      "practice": ["区分任务状态、项目约定和长期偏好", "测试更新与删除"],
+      "deliverables": ["记忆 Schema", "摘要后恢复任务"],
+      "acceptance": ["说明错误记忆和过期信息的处理"],
+      "repo_paths": []
+    },
+    {
+      "id": "W11",
+      "stage_id": "S05",
+      "assignment_ids": ["S05-C05-01", "S05-C10-01"],
+      "study": ["C05 第 12 章", "C10 配置与断言"],
+      "practice": [
+        "阅读 evals/README.md",
+        "先用现有配置理解 7 个场景,再在学习副本扩充"
+      ],
+      "deliverables": ["约 30 个学习任务", "评分规则"],
+      "acceptance": ["任务覆盖正常、证据不足、超时、权限拒绝和恢复"],
+      "repo_paths": ["evals/README.md"]
+    },
+    {
+      "id": "W12",
+      "stage_id": "S05",
+      "assignment_ids": ["S05-C08-01"],
+      "study": ["C08 模块 4 并行、子图、结果汇总"],
+      "practice": ["独立比较单 Agent 与多个只读分析角色", "C17 可选"],
+      "deliverables": [
+        "比较成功率、耗时与成本",
+        "写一个 Skill 的触发条件、步骤与验收规则"
+      ],
+      "acceptance": ["对齐阶段目标:版本比较、失败分析、受控协作"],
+      "repo_paths": []
+    },
+    {
+      "id": "W13",
+      "stage_id": "S05",
+      "assignment_ids": ["S05-C10-01", "S05-C05-01"],
+      "study": ["C10 结果比较", "C05 第 12 章复盘"],
+      "practice": ["保留固定任务与独立保留集", "C16/C18 可选"],
+      "deliverables": ["两个版本评测报告", "人工评分抽查", "失败分类与保留/回退结论"],
+      "acceptance": ["不只报平均分"],
+      "repo_paths": []
+    },
+    {
+      "id": "W14",
+      "stage_id": "S06",
+      "assignment_ids": ["S06-C03-01", "S06-C08-01"],
+      "study": ["C03 镜像与应用栈", "C08 模块 6"],
+      "practice": ["为独立练习打包", "整理服务配置、健康检查与版本信息"],
+      "deliverables": ["新环境启动记录", "配置说明"],
+      "acceptance": ["涉及托管部署时先在本地完成交付包"],
+      "repo_paths": []
+    },
+    {
+      "id": "W15",
+      "stage_id": "S06",
+      "assignment_ids": ["S06-C11-01"],
+      "study": ["C11 LLMOps"],
+      "practice": [
+        "研读 observability.py",
+        "制造模型/工具超时、检索失败",
+        "C19 按需选学"
+      ],
+      "deliverables": ["Trace 定位报告", "成本统计", "回滚演练", "Runbook"],
+      "acceptance": ["明确回放的外部依赖限制"],
+      "repo_paths": ["platform/fde_product/observability.py"]
+    },
+    {
+      "id": "W16",
+      "stage_id": "S07",
+      "assignment_ids": ["S07-C05-01", "S07-C20-01"],
+      "study": ["C05 第 14/16 章", "C20 README 与架构"],
+      "practice": ["二选一:研究报告系统或开发协作系统", "先固定实际版本"],
+      "deliverables": ["场景说明、架构、任务集、权限边界、接管点和业务验收标准"],
+      "acceptance": ["对齐阶段目标:可演示、可评测的综合项目"],
+      "repo_paths": []
+    },
+    {
+      "id": "W17",
+      "stage_id": "S07",
+      "assignment_ids": ["S07-C20-01"],
+      "study": ["C20 按所选场景研读"],
+      "practice": [
+        "完成端到端最小闭环:输入→工具→证据→输出→评测",
+        "C11 项目讲解选学"
+      ],
+      "deliverables": ["一次正常任务和一次失败任务演示"],
+      "acceptance": ["报告可回溯到来源和执行记录"],
+      "repo_paths": []
+    },
+    {
+      "id": "W18",
+      "stage_id": "S07",
+      "assignment_ids": ["S07-C11-01"],
+      "study": ["C11 UX 内容", "复盘原学习大纲"],
+      "practice": ["与 FDE 的需求澄清、fit-gap 和交付评价方法结合"],
+      "deliverables": [
+        "可运行版本",
+        "演示材料",
+        "评测与成本报告",
+        "已知限制",
+        "部署手册与下一步"
+      ],
+      "acceptance": ["对齐阶段目标:可演示、可评测的综合项目"],
+      "repo_paths": []
+    }
+  ],
+  "repo_links": [
+    {
+      "label": "模型调用:models.py",
+      "path": "platform/fde_product/models.py",
+      "description": "画出请求、重试、返回和用量统计链路;配套模型配置文档"
+    },
+    {
+      "label": "模型配置",
+      "path": "docs/model-configuration.md",
+      "description": "模型环境变量与网关配置说明"
+    },
+    {
+      "label": "工具与业务:business.py",
+      "path": "platform/fde_product/business.py",
+      "description": "区分分析与写入动作,检查校验与执行边界"
+    },
+    {
+      "label": "工具与业务:actions.py",
+      "path": "platform/fde_product/actions.py",
+      "description": "区分分析与写入动作,检查校验与执行边界"
+    },
+    {
+      "label": "Agent:agent.py",
+      "path": "platform/fde_product/agent.py",
+      "description": "追踪状态、澄清、确认与任务结束"
+    },
+    {
+      "label": "交互:interaction.py",
+      "path": "platform/fde_product/interaction.py",
+      "description": "追踪状态、澄清、确认与任务结束"
+    },
+    {
+      "label": "评测说明",
+      "path": "evals/README.md",
+      "description": "对照现有场景,补充学习用失败分类"
+    },
+    {
+      "label": "产品测试",
+      "path": "tests",
+      "description": "对照现有场景,补充学习用失败分类"
+    },
+    {
+      "label": "可观测性",
+      "path": "platform/fde_product/observability.py",
+      "description": "从执行记录定位模型或工具故障"
+    },
+    {
+      "label": "FDE W1 立项材料",
+      "path": "course-materials/w01/00_使用说明.md",
+      "description": "从业务目标推导指标、证据与接管节点"
+    }
+  ]
+}
