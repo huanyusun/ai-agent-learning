@@ -19,7 +19,7 @@
 | T07 CI 与定时自动更新 | 已完成(本地实现与 YAML 校验;**在线调度未验证**) | 见下 |
 | T08 整体验收与交接 | 已完成(验收记录见下;在线调度未验证) | 见下 |
 
-在线调度(定时 Actions)已实现配置但**未验证**:工作流文件已提交,分支尚未推送到 GitHub 默认分支,schedule/workflow_dispatch 均未触发过。其余结论均来自本地离线验证与真实网络检查。
+在线调度(定时 Actions)**已在线验证**(2026-10-29,本仓库 GitHub Actions):workflow_dispatch 真实运行三次,refresh / discover / 提交 / 带租约推送 / PR 创建全部成功,PR #1 是第一份可审核更新;CI 在 Ubuntu + Python 3.11 干净环境通过。详见文末「在线调度验证」。
 
 ## 环境说明
 
@@ -225,3 +225,15 @@
 2. huggingface.co 在当前网络不可达:HF 候选发现待网络可用;来源异常如实展示。
 3. 无 PR 权限路径未在线演练(设计上失败即保留报告 artifact)。
 4. C12–C18 的 B 级核查与费用待人工确认;HTTP 200 不改变该状态。
+
+
+## 在线调度验证(2026-10-29,GitHub Actions)
+
+推送本仓库后依次验证:
+
+1. `learning-hub-ci` 随 push 自动触发,Ubuntu + Python 3.11 干净环境:validate + 94 离线测试 + 漂移检查全部通过(两次)。
+2. `learning-hub-refresh` 手动 dispatch 三次:
+   - 第 1 次发现工作流缺陷:`gh pr list --jq '.[0]'` 在无开放 PR 时输出空串,解析崩溃;refresh / discover / 提交 / 带租约推送本身成功。已修复(70cd4c2)。
+   - 第 2 次暴露仓库设置:新仓库默认禁止 Actions 创建 PR,失败路径按设计工作(Job Summary、30 天 artifact、失败原因日志均保留)。已在仓库设置中允许 Actions 创建 PR。
+   - 第 3 次全绿:20 门检查(12 可达、8 受限——GitHub 出口 IP 被部分站点 403,如实标注)、HF + LangChain 双来源候选发现、正文变化提醒(C05/C20)、提交至 automation/learning-hub-refresh 并创建 PR #1。
+3. 结论:定时链路端到端可用;PR 合并由人工完成。
