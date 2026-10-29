@@ -1,0 +1,51 @@
+# 学习中心静态站点部署:把 learning/ 发布到 GitHub Pages。
+# 站点地址:https://huanyusun.github.io/ai-agent-learning/
+# 自有服务器域名代理加速:见 learning/MAINTENANCE.md「自定义域名与代理加速」。
+name: learning-hub-pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "learning/**"
+      - "AI学习路径与大纲.md"
+      - "docs/superpowers/**"
+      - ".github/workflows/learning-hub-pages.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: learning-hub-pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+      - name: Configure Pages
+        uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6.0.0
+      - name: Assemble site
+        run: |
+          mkdir -p _site/docs/superpowers/plans
+          rsync -a learning/ _site/
+          cp "AI学习路径与大纲.md" _site/
+          cp docs/superpowers/plans/2026-10-28-learning-hub.md _site/docs/superpowers/plans/
+          cp learning/MAINTENANCE.md _site/
+          # 生成文件中的 ../ 相对链接在站点根都能命中;platform/ 等代码研读链接指向仓库本身
+      - name: Upload pages artifact
+        uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
+        with:
+          path: _site
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1
