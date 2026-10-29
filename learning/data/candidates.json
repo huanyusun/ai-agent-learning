@@ -26,22 +26,130 @@
       "status": "new",
       "title": "Introduction to LangSmith Deployment Course Learn to deploy, manage, and control your agents with LangSmith Deployment.",
       "url": "https://academy.langchain.com/courses/langsmith-deployment"
+    },
+    {
+      "first_seen_at": "2026-10-29T03:23:50Z",
+      "last_seen_at": "2026-10-29T03:23:50Z",
+      "note": "",
+      "source_id": "hf-learn",
+      "status": "new",
+      "title": "LLM Course This course will teach you about large language models using libraries from the HF ecosystem",
+      "url": "https://huggingface.co/learn/llm-course"
+    },
+    {
+      "first_seen_at": "2026-10-29T03:23:50Z",
+      "last_seen_at": "2026-10-29T03:23:50Z",
+      "note": "",
+      "source_id": "hf-learn",
+      "status": "new",
+      "title": "Context Course Learn context engineering for code agents",
+      "url": "https://huggingface.co/learn/context-course"
+    },
+    {
+      "first_seen_at": "2026-10-29T03:23:50Z",
+      "last_seen_at": "2026-10-29T03:23:50Z",
+      "note": "",
+      "source_id": "hf-learn",
+      "status": "new",
+      "title": "Robotics Course This course will teach you to build robots with using LeRobot",
+      "url": "https://huggingface.co/learn/robotics-course"
+    },
+    {
+      "first_seen_at": "2026-10-29T03:23:50Z",
+      "last_seen_at": "2026-10-29T03:23:50Z",
+      "note": "",
+      "source_id": "hf-learn",
+      "status": "new",
+      "title": "a smol course This smollest course on post-training AI models",
+      "url": "https://huggingface.co/learn/smol-course"
+    },
+    {
+      "first_seen_at": "2026-10-29T03:23:50Z",
+      "last_seen_at": "2026-10-29T03:23:50Z",
+      "note": "",
+      "source_id": "hf-learn",
+      "status": "new",
+      "title": "Agents Course Learn to build and deploy your own AI agents",
+      "url": "https://huggingface.co/learn/agents-course"
+    },
+    {
+      "first_seen_at": "2026-10-29T03:23:50Z",
+      "last_seen_at": "2026-10-29T03:23:50Z",
+      "note": "",
+      "source_id": "hf-learn",
+      "status": "new",
+      "title": "Deep RL Course This course will teach you about deep reinforcement learning using libraries from the HF ecosystem",
+      "url": "https://huggingface.co/learn/deep-rl-course"
+    },
+    {
+      "first_seen_at": "2026-10-29T03:23:50Z",
+      "last_seen_at": "2026-10-29T03:23:50Z",
+      "note": "",
+      "source_id": "hf-learn",
+      "status": "new",
+      "title": "Community Computer Vision Course This course will teach you about computer vision ML using libraries and models from the HF ecosystem",
+      "url": "https://huggingface.co/learn/computer-vision-course"
+    },
+    {
+      "first_seen_at": "2026-10-29T03:23:50Z",
+      "last_seen_at": "2026-10-29T03:23:50Z",
+      "note": "",
+      "source_id": "hf-learn",
+      "status": "new",
+      "title": "Audio Course Learn to apply transformers to audio data using libraries from the HF ecosystem",
+      "url": "https://huggingface.co/learn/audio-course"
+    },
+    {
+      "first_seen_at": "2026-10-29T03:23:50Z",
+      "last_seen_at": "2026-10-29T03:23:50Z",
+      "note": "",
+      "source_id": "hf-learn",
+      "status": "new",
+      "title": "Open-Source AI Cookbook A collection of open-source-powered notebooks by AI builders, for AI builders",
+      "url": "https://huggingface.co/learn/cookbook"
+    },
+    {
+      "first_seen_at": "2026-10-29T03:23:50Z",
+      "last_seen_at": "2026-10-29T03:23:50Z",
+      "note": "",
+      "source_id": "hf-learn",
+      "status": "new",
+      "title": "ML for Games Course This course will teach you about integrating AI models your game and using AI tools in your game development workflow",
+      "url": "https://huggingface.co/learn/ml-games-course"
+    },
+    {
+      "first_seen_at": "2026-10-29T03:23:50Z",
+      "last_seen_at": "2026-10-29T03:23:50Z",
+      "note": "",
+      "source_id": "hf-learn",
+      "status": "new",
+      "title": "Diffusion Course Learn about diffusion models & how to use them with diffusers",
+      "url": "https://huggingface.co/learn/diffusion-course"
+    },
+    {
+      "first_seen_at": "2026-10-29T03:23:50Z",
+      "last_seen_at": "2026-10-29T03:23:50Z",
+      "note": "",
+      "source_id": "hf-learn",
+      "status": "new",
+      "title": "ML for 3D Course Learn about 3D ML with libraries from the HF ecosystem",
+      "url": "https://huggingface.co/learn/ml-for-3d-course"
     }
   ],
   "last_discovery_month": null,
   "schema_version": 1,
   "source_checks": {
     "hf-learn": {
-      "checked_at": "2026-10-28T17:00:30Z",
-      "last_success_month": null,
-      "note": "robots.txt 无法获取(network_error),本次跳过课程页检查",
-      "status": "failed"
-    },
-    "langchain-academy": {
-      "checked_at": "2026-10-28T17:00:30Z",
+      "checked_at": "2026-10-29T03:23:50Z",
       "last_success_month": "2026-10",
       "note": "",
       "status": "ok"
+    },
+    "langchain-academy": {
+      "checked_at": "2026-10-29T03:23:50Z",
+      "last_success_month": null,
+      "note": "目录抓取失败:HTTP 403;需人工检查",
+      "status": "failed"
     }
   }
 }
