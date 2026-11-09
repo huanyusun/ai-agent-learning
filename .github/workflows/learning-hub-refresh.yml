@@ -141,7 +141,9 @@ jobs:
           else:
               print("", "")')
           if [ -n "$NUMBER" ]; then
-            if [ "$AUTHOR" != "github-actions[bot]" ]; then
+            # gh 的 GraphQL 作者字段可将同一机器人表示为 app/github-actions;
+            # REST API 则使用 github-actions[bot]。只接受这两个精确名称。
+            if [ "$AUTHOR" != "github-actions[bot]" ] && [ "$AUTHOR" != "app/github-actions" ]; then
               echo "分支/PR 归属不符:automation/learning-hub-refresh 的开放 PR 由 $AUTHOR 创建,不覆盖;报告与数据保留在 artifact。" | tee -a "$GITHUB_STEP_SUMMARY"
               exit 1
             fi
